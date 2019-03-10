@@ -43,7 +43,7 @@ message(STATUS "PROJECT_BINARY_DIR :=" ${PROJECT_BINARY_DIR})
 include(GNUInstallDirs)
 add_subdirectory(src)
 # Add all targets to the build-tree export set
-export(TARGETS library
+export(TARGETS TdLib
         FILE "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Targets.cmake")
 
 # Export the package for use from the build-tree

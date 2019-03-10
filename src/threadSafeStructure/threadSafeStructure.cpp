@@ -2,7 +2,7 @@
 // Created by wang on 19-3-9.
 //
 
-#include "library1.h"
+#include "threadSafeStructure.h"
 #include <iostream>
 
 void hello() {

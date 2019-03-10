@@ -1,6 +1,6 @@
 #include <iostream>
-#include "library/library2.h"
-#include "library/library1.h"
+#include "TdLibrary/library2.h"
+#include "TdLibrary/threadSafeStructure.h"
 
 using namespace std;
 int main() {

@@ -10,5 +10,5 @@ set(TdLib_INCLUDE_DIRS "@CONF_INCLUDE_DIRS@")
 
 # Our library dependencies (contains definitions for IMPORTED targets)
 include("${TdLib_CMAKE_DIR}/@PROJECT_NAME@Targets.cmake")
-# These are IMPORTED targets created by FooBarTargets.cmake
-set(TdLib_LIBRARIES library)
+# These are IMPORTED targets created by TdLibTargets.cmake
+set(TdLib_LIBRARIES @PROJECT_NAME@)
