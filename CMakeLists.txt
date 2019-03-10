@@ -64,7 +64,7 @@ configure_file(${PROJECT_NAME}Config.cmake.in
 set(CONF_INCLUDE_DIRS "\${TdLib_CMAKE_DIR}/${REL_INCLUDE_DIR}")
 configure_file(${PROJECT_NAME}Config.cmake.in
         "${PROJECT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/${PROJECT_NAME}Config.cmake" @ONLY)
-#message(STATUS "${TdLib_CMAKE_DIR}/${REL_INCLUDE_DIR}")
+message(STATUS "${TdLib_CMAKE_DIR}/${REL_INCLUDE_DIR}")
 # ... for both
 configure_file(${PROJECT_NAME}ConfigVersion.cmake.in
         "${PROJECT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake" @ONLY)

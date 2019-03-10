@@ -1,8 +1,7 @@
 # - Config file for the FooBar package
 # It defines the following variables
-#  FOOBAR_INCLUDE_DIRS - include directories for FooBar
-#  FOOBAR_LIBRARIES    - libraries to link against
-#  FOOBAR_EXECUTABLE   - the bar executable
+#  TdLib_INCLUDE_DIRS - include directories for TdLib
+#  TdLib_LIBRARIES    - libraries to link against
 
 # Compute paths
 get_filename_component(TdLib_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
@@ -12,6 +11,4 @@ set(TdLib_INCLUDE_DIRS "@CONF_INCLUDE_DIRS@")
 # Our library dependencies (contains definitions for IMPORTED targets)
 include("${TdLib_CMAKE_DIR}/@PROJECT_NAME@Targets.cmake")
 # These are IMPORTED targets created by FooBarTargets.cmake
-#set(TdLib_LIBRARIES foo)
-set(TdLib_LIBRARIES library2)
-#set(TdLib_EXECUTABLE library2)
+set(TdLib_LIBRARIES library)
