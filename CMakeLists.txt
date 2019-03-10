@@ -41,10 +41,9 @@ message(STATUS "PROJECT_SOURCE_DIR :=" ${PROJECT_SOURCE_DIR})
 message(STATUS "PROJECT_BINARY_DIR :=" ${PROJECT_BINARY_DIR})
 
 include(GNUInstallDirs)
-add_subdirectory(threadSafeStructure)
-add_subdirectory(test)
+add_subdirectory(src)
 # Add all targets to the build-tree export set
-export(TARGETS library1 library2
+export(TARGETS library
         FILE "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Targets.cmake")
 
 # Export the package for use from the build-tree
