@@ -2,7 +2,6 @@
 // Created by wang on 19-3-9.
 //
 
-#ifndef TDLIBRARY_LIBRARY1_H
-#define TDLIBRARY_LIBRARY1_H
+#pragma once
 void hello();
-#endif //TDLIBRARY_LIBRARY1_H
+
