@@ -1,0 +1,13 @@
+cmake_minimum_required(VERSION 3.9)
+project(untitled1)
+
+set(CMAKE_CXX_STANDARD 11)
+set(TdLib_DIR "/home/wang/CLionProjects/TdLibrary/install/lib/CMake/TdLib/")
+find_package(TdLib REQUIRED)
+include_directories(${TdLib_INCLUDE_DIRS})
+MESSAGE(STATUS "TdLib_INCLUDE_DIRS = " ${TdLib_INCLUDE_DIRS})
+#link_directories(${TdLib_LIBRARY_DIRS})
+#MESSAGE(STATUS "TdLib_LIBRARY_DIRS = " ${TdLib_LIBRARY_DIRS})
+add_executable(untitled1 main.cpp)
+message(STATUS "TdLib_LIBRARIES = " ${TdLib_LIBRARIES})
+target_link_libraries(untitled1 ${TdLib_LIBRARIES})
