@@ -1,12 +1,12 @@
 add_library(TdLib SHARED
         threadSafeStructure/threadSafeStructure.cpp
         threadSafeStructure/threadSafeStructure.h
-        test/library2.cpp
-        test/library2.h)
+        realsense/realsense.cpp
+        realsense/realsense.h)
 
 set_target_properties(TdLib PROPERTIES
         PUBLIC_HEADER
-        "test/library2.h;threadSafeStructure/threadSafeStructure.h")
+        "realsense/realsense.h;threadSafeStructure/threadSafeStructure.h")
 
 install(TARGETS TdLib
         # IMPORTANT: Add the foo library to the "export-set"

@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.9)
 project(LibTest)
 
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
 set(CMAKE_CXX_STANDARD 11)
 set(TdLib_DIR "/home/wang/CLionProjects/TdLibrary/install/lib/CMake/TdLib/")
 find_package(TdLib REQUIRED)
@@ -10,4 +12,5 @@ MESSAGE(STATUS "TdLib_INCLUDE_DIRS = " ${TdLib_INCLUDE_DIRS})
 #MESSAGE(STATUS "TdLib_LIBRARY_DIRS = " ${TdLib_LIBRARY_DIRS})
 add_executable(LibTest main.cpp)
 message(STATUS "TdLib_LIBRARIES = " ${TdLib_LIBRARIES})
-target_link_libraries(LibTest ${TdLib_LIBRARIES})
+target_link_libraries(LibTest ${TdLib_LIBRARIES}
+        Threads::Threads)
