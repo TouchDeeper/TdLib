@@ -8,7 +8,7 @@ This is a persoal shared library include the commonly used functions in developm
 ### threadSafeStructure
 - None
 
-##Install
+## Install
 If you don't want to install the realsense module,jut comment the related line in the CMakelist.txt.
 ```
 cmake .. -DCMAKE_INSTALL_PREFIX:=your_path
