@@ -9,10 +9,10 @@
 #include <iostream>
 #include <vector>
 //PCL
-#include <pcl/common/common_headers.h>
-#include <pcl/visualization/pcl_visualizer.h>
-#include <pcl/io/pcd_io.h>
-#include <pcl/filters/passthrough.h>
+//#include <pcl/common/common_headers.h>
+//#include <pcl/visualization/pcl_visualizer.h>
+//#include <pcl/io/pcd_io.h>
+//#include <pcl/filters/passthrough.h>
 
 #include <opencv2/opencv.hpp>   // Include OpenCV API
 namespace td{
