@@ -17,6 +17,6 @@ make install
 ```
 ## Usage
 - test is used to test the TdLib.
-- modify the `[OpenCV_DIR]()` to your path
+- modify the [`OpenCV_DIR`](https://github.com/TouchDeeper/TdLib/blob/dev/src/CMakeLists.txt#L8) to your path
 
 
