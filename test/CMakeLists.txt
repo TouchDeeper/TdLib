@@ -19,10 +19,15 @@ link_directories(${PCL_LIBRARY_DIRS})
 find_package(OpenCV REQUIRED)
 include_directories(${OPENCV_INCLUDE_DIRS})
 link_directories(${OpenCV_LIBRARY_DIRS})
-
+if(OpenCV_FOUND)
+    MESSAGE(STATUS "OPENCV_INCLUDE_DIRS = " ${OPENCV_INCLUDE_DIRS})
+    MESSAGE(STATUS "OpenCV_LIBRARY_DIRS = " ${OpenCV_LIBRARY_DIRS})
+    MESSAGE(STATUS "OpenCV_LIBRARIES = " ${OpenCV_LIBRARIES})
+endif()
 add_executable(LibTest main.cpp)
 message(STATUS "TdLib_LIBRARIES = " ${TdLib_LIBRARIES})
 target_link_libraries(LibTest ${TdLib_LIBRARIES}
         Threads::Threads
         ${OpenCV_LIBRARIES}
-        ${PCL_LIBRARIES})
+        ${PCL_LIBRARIES}
+        )

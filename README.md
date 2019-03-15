@@ -9,7 +9,7 @@ This is a persoal shared library include the commonly used functions in developm
 - None
 
 ## Install
-If you don't want to install the realsense module,jut comment the related line in the CMakelist.txt.
+If you don't want to install the realsense module,jut comment the related line in src/CMakelist.txt.
 ```
 cmake .. -DCMAKE_INSTALL_PREFIX:=your_path
 make 
@@ -17,5 +17,6 @@ make install
 ```
 ## Usage
 - test is used to test the TdLib.
+- modify the `[OpenCV_DIR]()` to your path
 
 

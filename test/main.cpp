@@ -3,10 +3,11 @@
 #include "TdLibrary/threadSafeStructure.h"
 #include <thread>
 #include <atomic>
+#include "opencv2/core.hpp"
 using namespace std;
 int main() {
     td::hello();
-    td::rs::helloz();
+//    td::rs::helloz();
     td::threadsafe_queue<int> q1;
 
     std::thread t2([&](){
