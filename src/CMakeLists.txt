@@ -4,7 +4,7 @@ add_library(TdLib SHARED
         threadSafeStructure/threadSafeStructure.h
         realsense/realsense.cpp
         realsense/realsense.h
-        )
+        FIleOperation/FileOperation.cpp FIleOperation/FileOperation.h)
 set(OpenCV_DIR "/usr/local/share/OpenCV")
 # OpenCV
 find_package(OpenCV REQUIRED)
@@ -22,7 +22,8 @@ link_directories(${PCL_LIBRARY_DIRS})
 
 set_target_properties(TdLib PROPERTIES
         PUBLIC_HEADER
-        "realsense/realsense.h;threadSafeStructure/threadSafeStructure.h")
+        "realsense/realsense.h;threadSafeStructure/threadSafeStructure.h;
+         FIleOperation/FileOperation.h")
 #        "threadSafeStructure/threadSafeStructure.h")
 target_link_libraries(TdLib
                     ${DEPENDENCIES}
