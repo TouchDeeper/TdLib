@@ -9,7 +9,11 @@ add_library(TdLib SHARED
         FileOperation/keyboard.cpp
         FileOperation/keyboard.h
         PCL/filter.cpp
-        PCL/filter.h)
+        PCL/filter.h
+        PCL/enveloping.cpp
+        PCL/enveloping.h
+        PCL/tools.cpp
+        PCL/tools.h)
 set(OpenCV_DIR "/usr/local/share/OpenCV")
 # OpenCV
 find_package(OpenCV REQUIRED)
@@ -20,6 +24,10 @@ if(OpenCV_FOUND)
     MESSAGE(STATUS "OpenCV_LIBRARY_DIRS = " ${OpenCV_LIBRARY_DIRS})
     MESSAGE(STATUS "OpenCV_LIBRARIES = " ${OpenCV_LIBRARIES})
 endif()
+
+# Eigen
+include_directories( "/usr/include/eigen3" )
+
 #PCL
 find_package(PCL 1.8 REQUIRED)
 include_directories(${PCL_INCLUDE_DIRS})
@@ -30,6 +38,8 @@ set(HEADER_FILES
         threadSafeStructure/threadSafeStructure.h
         FileOperation/keyboard.h
         PCL/filter.h
+        PCL/enveloping.h
+        PCL/tools.h
         )
 set_target_properties(TdLib PROPERTIES
         PUBLIC_HEADER
