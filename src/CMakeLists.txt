@@ -13,7 +13,8 @@ add_library(TdLib SHARED
         PCL/enveloping.cpp
         PCL/enveloping.h
         PCL/tools.cpp
-        PCL/tools.h)
+        PCL/tools.h
+        PCL/common_typedef.h)
 set(OpenCV_DIR "/usr/local/share/OpenCV")
 # OpenCV
 find_package(OpenCV REQUIRED)
@@ -40,6 +41,7 @@ set(HEADER_FILES
         PCL/filter.h
         PCL/enveloping.h
         PCL/tools.h
+        PCL/common_typedef.h
         )
 set_target_properties(TdLib PROPERTIES
         PUBLIC_HEADER

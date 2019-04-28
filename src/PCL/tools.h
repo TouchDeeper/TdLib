@@ -4,11 +4,12 @@
 
 #ifndef TDLIB_TOOL_H
 #define TDLIB_TOOL_H
-#include <pcl/common/centroid.h>
-#include <pcl/point_cloud.h>
-#include <Eigen/Core>
+
+#include "common_typedef.h"
 namespace td{
-    void demean_cloud (pcl::PointCloud<pcl::PointXYZ>::Ptr cloud);
+    namespace pclib{
+        void demean_cloud (pcl::PointCloud<pcl::PointXYZ>::Ptr cloud);
+    }//namespace pclib
 }//namesoace td
 
 
