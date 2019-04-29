@@ -27,6 +27,9 @@
 #include <pcl/point_cloud.h>
 
 #include <pcl/features/normal_3d.h>
+#include <pcl/features/esf.h>
+
+#include <pcl/keypoints/iss_3d.h>
 
 #include <pcl/kdtree/kdtree_flann.h>
 
@@ -48,6 +51,7 @@ namespace td{
         typedef pcl::ReferenceFrame RFType;
         typedef pcl::PointXYZ Point;
         typedef pcl::PointXYZRGB PointRGB;
+        typedef pcl::PointXYZRGBA PointRGBA;
         typedef pcl::PointNormal PointN;
         typedef pcl::PointCloud<pcl::Normal> NormalCloud;
         typedef pcl::PointCloud<pcl::Normal>::Ptr NormalCloudPtr;
@@ -55,11 +59,19 @@ namespace td{
         typedef pcl::PointCloud<pcl::PointXYZ>::Ptr PointCloudPtr;
         typedef pcl::PointCloud<pcl::PointXYZRGB> PointRGBCloud;
         typedef pcl::PointCloud<pcl::PointXYZRGB>::Ptr PointRGBCloudPtr;
+        typedef pcl::PointCloud<pcl::PointXYZRGBA> PointRGBACloud;
+        typedef pcl::PointCloud<pcl::PointXYZRGBA>::Ptr PointRGBACloudPtr;
         typedef pcl::PointCloud<pcl::PointNormal> PointNCloud;
         typedef pcl::PointCloud<pcl::PointNormal>::Ptr PointNCloudPtr;
-        typedef pcl::FPFHSignature33 FpfhDescriptorType;
-        typedef pcl::PointCloud<FpfhDescriptorType> FpfhDescriptorCloud;
-        typedef pcl::PointCloud<FpfhDescriptorType>::Ptr FpfhDescriptorCloudPtr;
+
+        typedef pcl::FPFHSignature33 FpfhDescriptor;
+        typedef pcl::PointCloud<FpfhDescriptor> FpfhDescriptorCloud;
+        typedef pcl::ESFSignature640 EsfDescriptor;
+        typedef pcl::PointCloud<EsfDescriptor> EsfDescriptorCloud;
+        typedef pcl::PointCloud<EsfDescriptor>::Ptr EsfDescriptorCloudPtr;
+        typedef pcl::ESFEstimation<Point, EsfDescriptor> EsfDescriptorEstimation;
+
+        typedef pcl::PointCloud<FpfhDescriptor>::Ptr FpfhDescriptorCloudPtr;
         typedef std::vector<Eigen::Matrix4d, Eigen::aligned_allocator<Eigen::Matrix4d> > VectorMatrix4d;
         typedef std::vector<Eigen::Vector3d, Eigen::aligned_allocator<Eigen::Vector3d> > VectorVector3d;
     }//namespace pclib

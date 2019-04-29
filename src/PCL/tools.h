@@ -9,6 +9,14 @@
 namespace td{
     namespace pclib{
         void demean_cloud (pcl::PointCloud<pcl::PointXYZ>::Ptr cloud);
+        /**
+        * compute the cloud resolution
+        * @param cloud input cloud
+        * @return the cloud resolution
+        */
+        double computeCloudResolution (const PointCloudPtr &cloud);
+        double computeCloudResolution (const PointRGBCloudPtr &cloud);
+        double computeCloudResolution (const PointRGBACloudPtr &cloud);
     }//namespace pclib
 }//namesoace td
 
