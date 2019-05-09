@@ -18,7 +18,9 @@ add_library(TdLib SHARED
         PCL/keypoint.cpp
         PCL/keypoint.h
         PCL/global_feeature.cpp
-        PCL/global_feature.h)
+        PCL/global_feature.h
+        PCL/local_features.cpp
+        PCL/local_features.h)
 set(OpenCV_DIR "/usr/local/share/OpenCV")
 # OpenCV
 find_package(OpenCV REQUIRED)
@@ -48,6 +50,7 @@ set(HEADER_FILES
         PCL/common_typedef.h
         PCL/keypoint.h
         PCL/global_feature.h
+        PCL/local_features.h
         )
 set_target_properties(TdLib PROPERTIES
         PUBLIC_HEADER

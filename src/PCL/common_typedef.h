@@ -28,6 +28,7 @@
 
 #include <pcl/features/normal_3d.h>
 #include <pcl/features/esf.h>
+#include <pcl/features/fpfh_omp.h>
 
 #include <pcl/keypoints/iss_3d.h>
 
