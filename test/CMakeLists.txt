@@ -25,9 +25,12 @@ if(OpenCV_FOUND)
     MESSAGE(STATUS "OpenCV_LIBRARIES = " ${OpenCV_LIBRARIES})
 endif()
 add_executable(LibTest main.cpp)
+add_executable(ga_example ga_example.cpp)
 message(STATUS "TdLib_LIBRARIES = " ${TdLib_LIBRARIES})
 target_link_libraries(LibTest ${TdLib_LIBRARIES}
         Threads::Threads
         ${OpenCV_LIBRARIES}
         ${PCL_LIBRARIES}
+        )
+target_link_libraries(ga_example ${TdLib_LIBRARIES}
         )

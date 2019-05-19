@@ -1,5 +1,5 @@
 #include "realsense.h"
-
+#include <omp.h>
 namespace td{
     namespace rs{
 
@@ -38,6 +38,7 @@ namespace td{
 
             // Iterating through all points and setting XYZ coordinates
             // and RGB values
+#pragma omp parallel for
             for (int i = 0; i < cloud->height; i++)
             {
                 for (int j = 0; j < cloud->width; ++j) {

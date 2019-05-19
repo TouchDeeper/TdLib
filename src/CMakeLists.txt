@@ -20,7 +20,17 @@ add_library(TdLib SHARED
         PCL/global_feeature.cpp
         PCL/global_feature.h
         PCL/local_features.cpp
-        PCL/local_features.h)
+        PCL/local_features.h
+        GALGO-2.0/src/Chromosome.hpp
+        GALGO-2.0/src/Converter.hpp
+        GALGO-2.0/src/Evolution.hpp
+        GALGO-2.0/src/example.cpp
+        GALGO-2.0/src/Galgo.hpp
+        GALGO-2.0/src/GeneticAlgorithm.hpp
+        GALGO-2.0/src/Parameter.hpp
+        GALGO-2.0/src/Population.hpp
+        GALGO-2.0/src/Randomize.hpp
+        )
 set(OpenCV_DIR "/usr/local/share/OpenCV")
 # OpenCV
 find_package(OpenCV REQUIRED)
@@ -39,6 +49,15 @@ include_directories( "/usr/include/eigen3" )
 find_package(PCL 1.8 REQUIRED)
 include_directories(${PCL_INCLUDE_DIRS})
 link_directories(${PCL_LIBRARY_DIRS})
+
+#OpenMp
+FIND_PACKAGE( OpenMP REQUIRED)
+if(OPENMP_FOUND)
+    message("OPENMP FOUND")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
+endif()
+
 set(HEADER_FILES
         FileOperation/FileOperation.h
         realsense/realsense.h
@@ -51,6 +70,14 @@ set(HEADER_FILES
         PCL/keypoint.h
         PCL/global_feature.h
         PCL/local_features.h
+        GALGO-2.0/src/Chromosome.hpp
+        GALGO-2.0/src/Converter.hpp
+        GALGO-2.0/src/Evolution.hpp
+        GALGO-2.0/src/Galgo.hpp
+        GALGO-2.0/src/GeneticAlgorithm.hpp
+        GALGO-2.0/src/Parameter.hpp
+        GALGO-2.0/src/Population.hpp
+        GALGO-2.0/src/Randomize.hpp
         )
 set_target_properties(TdLib PROPERTIES
         PUBLIC_HEADER
