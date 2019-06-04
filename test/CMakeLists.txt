@@ -37,3 +37,6 @@ target_link_libraries(ga_example ${TdLib_LIBRARIES}
 add_executable(basic basic.cpp)
 target_link_libraries(basic ${TdLib_LIBRARIES}
         )
+add_executable(example_so1 example_so1.cpp)
+target_link_libraries(example_so1 ${TdLib_LIBRARIES}
+        )

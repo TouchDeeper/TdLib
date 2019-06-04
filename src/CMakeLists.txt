@@ -32,6 +32,7 @@ add_library(TdLib SHARED
         GALGO-2.0/src/Randomize.hpp
         tool/random_tool.hpp
         matplotlib-cpp/matplotlibcpp.h
+        openGA/openga.hpp
         )
 set(OpenCV_DIR "/usr/local/share/OpenCV")
 # OpenCV
@@ -66,6 +67,13 @@ if(OPENMP_FOUND)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
 endif()
 
+#pthread
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
+
+#Boost
+find_package(Boost COMPONENTS system filesystem thread chrono REQUIRED)
+
 set(HEADER_FILES
         FileOperation/FileOperation.h
         realsense/realsense.h
@@ -88,6 +96,7 @@ set(HEADER_FILES
         GALGO-2.0/src/Randomize.hpp
         tool/random_tool.hpp
         matplotlib-cpp/matplotlibcpp.h
+        openGA/openga.hpp
         )
 set_target_properties(TdLib PROPERTIES
         PUBLIC_HEADER
@@ -98,6 +107,7 @@ target_link_libraries(TdLib
                     ${DEPENDENCIES}
                     ${OpenCV_LIBRARIES}
                     ${PCL_LIBRARIES}
+                    Threads::Threads
                     )
 
 install(TARGETS TdLib
