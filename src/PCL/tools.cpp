@@ -110,6 +110,24 @@ namespace td{
             }
             return res;
         }
+
+        /**
+        * show the align result
+        * @param object the object view
+        * @param scene the scene view
+        * @param transformation the transformation s_T_o
+        */
+        void ShowAlignResult(const PointNCloudPtr object, const PointNCloudPtr scene, const Eigen::Matrix<float,4,4,Eigen::DontAlign> transformation){
+            pcl::visualization::PCLVisualizer viewer ("align");
+            viewer.addText ("align", 10, 10, 18, 1.0, 1.0, 1.0, "text1");
+            viewer.addCoordinateSystem (0.03);
+            viewer.addPointCloud<PointN>(scene,"scene_view");
+            PointNCloudPtr model_view_transformed(new PointNCloud);
+            pcl::transformPointCloud(*object, *model_view_transformed, transformation);
+            viewer.addPointCloud<PointN>(model_view_transformed,ColorHandlerT (model_view_transformed, 0.0, 255.0, 0.0),"model_view");
+            while (!viewer.wasStopped())
+                viewer.spin();
+        }
     }
 
 }

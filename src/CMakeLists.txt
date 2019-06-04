@@ -30,6 +30,8 @@ add_library(TdLib SHARED
         GALGO-2.0/src/Parameter.hpp
         GALGO-2.0/src/Population.hpp
         GALGO-2.0/src/Randomize.hpp
+        tool/random_tool.hpp
+        matplotlib-cpp/matplotlibcpp.h
         )
 set(OpenCV_DIR "/usr/local/share/OpenCV")
 # OpenCV
@@ -49,6 +51,12 @@ include_directories( "/usr/include/eigen3" )
 find_package(PCL 1.8 REQUIRED)
 include_directories(${PCL_INCLUDE_DIRS})
 link_directories(${PCL_LIBRARY_DIRS})
+
+#python
+include_directories(${PYTHONHOME}/include)
+include_directories(${PYTHONHOME}/Lib/site-packages/numpy/core/include)
+link_directories(${PYTHONHOME}/libs)
+add_definitions(-DMATPLOTLIBCPP_PYTHON_HEADER=Python.h)
 
 #OpenMp
 FIND_PACKAGE( OpenMP REQUIRED)
@@ -78,6 +86,8 @@ set(HEADER_FILES
         GALGO-2.0/src/Parameter.hpp
         GALGO-2.0/src/Population.hpp
         GALGO-2.0/src/Randomize.hpp
+        tool/random_tool.hpp
+        matplotlib-cpp/matplotlibcpp.h
         )
 set_target_properties(TdLib PROPERTIES
         PUBLIC_HEADER

@@ -17,6 +17,13 @@ namespace td{
         double computeCloudResolution (const PointCloudPtr &cloud);
         double computeCloudResolution (const PointRGBCloudPtr &cloud);
         double computeCloudResolution (const PointRGBACloudPtr &cloud);
+        /**
+         * show the align result
+         * @param object the object view
+         * @param scene the scene view
+         * @param transformation the transformation s_T_o
+         */
+        void ShowAlignResult(const PointNCloudPtr object, const PointNCloudPtr scene, const Eigen::Matrix<float,4,4,Eigen::DontAlign> transformation);
     }//namespace pclib
 }//namesoace td
 

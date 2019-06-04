@@ -34,3 +34,6 @@ target_link_libraries(LibTest ${TdLib_LIBRARIES}
         )
 target_link_libraries(ga_example ${TdLib_LIBRARIES}
         )
+add_executable(basic basic.cpp)
+target_link_libraries(basic ${TdLib_LIBRARIES}
+        )

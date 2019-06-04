@@ -75,6 +75,8 @@ namespace td{
         typedef pcl::PointCloud<FpfhDescriptor>::Ptr FpfhDescriptorCloudPtr;
         typedef std::vector<Eigen::Matrix4d, Eigen::aligned_allocator<Eigen::Matrix4d> > VectorMatrix4d;
         typedef std::vector<Eigen::Vector3d, Eigen::aligned_allocator<Eigen::Vector3d> > VectorVector3d;
+
+        typedef pcl::visualization::PointCloudColorHandlerCustom<PointN> ColorHandlerT;
     }//namespace pclib
 }//namespace td
 #endif //TDLIB_COMMON_TYPEDEF_H
