@@ -5,4 +5,4 @@ install
 install2
 FooBar/build
 test/cmake-build-debug
-
+test/bin

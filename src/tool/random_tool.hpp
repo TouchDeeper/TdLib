@@ -7,6 +7,13 @@
 
 #include <random>
 namespace td{
+    /**
+     * get a random value between min and max
+     * @tparam T type of data
+     * @param min
+     * @param max
+     * @return a random value between min and max
+     */
     template <class T> T UniformSampling(T min, T max)
     {
         std::mt19937 rng;
