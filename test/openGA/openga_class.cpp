@@ -32,5 +32,7 @@ void openga_class::solve(){
     std::cout<<"The problem is optimized in "<<timer.toc()<<" seconds."<<std::endl;
 
     output_file.close();
+    auto best_chromosomes = ga_obj.last_generation.chromosomes[ga_obj.last_generation.best_chromosome_index];
+    std::cout<< "best chromosomes = ("<<best_chromosomes.genes.x<<","<<best_chromosomes.genes.y<<")"<<std::endl;
 }
 std::ofstream openga_class::output_file;

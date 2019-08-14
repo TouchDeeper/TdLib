@@ -6,6 +6,7 @@
 #define TDLIB_RANDOM_TOOL_HPP
 
 #include <random>
+#include <iostream>
 namespace td{
     /**
      * get a random value between min and max
@@ -23,6 +24,8 @@ namespace td{
         return distribution(rng);
 
     }
-}
+
+
+} // namespace td
 
 #endif //TDLIB_RANDOM_TOOL_HPP

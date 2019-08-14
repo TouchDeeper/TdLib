@@ -1,12 +1,14 @@
+
+//#include "TdLibrary/realsense.h"
+//#include "TdLibrary/threadSafeStructure.h"
+//#include "TdLibrary/random_tool.hpp"
+//#include <thread>
+//#include <atomic>
+//#include "opencv2/core.hpp"
 #include <iostream>
-#include "TdLibrary/realsense.h"
-#include "TdLibrary/threadSafeStructure.h"
-#include "TdLibrary/random_tool.hpp"
-#include <thread>
-#include <atomic>
-#include "opencv2/core.hpp"
 using namespace std;
 int main() {
+
 //    td::hello();
 ////    td::rs::helloz();
 //    td::threadsafe_queue<int> q1;
@@ -29,11 +31,9 @@ int main() {
 //            std::cout<<" main thread push value "<<i<<std::endl;
 //        }
 //    t2.join();
+    float x = 1.123456789;
+    float y = 0.000123456789;
+    std::cout<<x<<std::endl<<y<<std::endl;
 
-    double min = -2;
-    double max = 2;
-    for (int i = 0; i < 100; ++i) {
-        std::cout<<td::UniformSampling<double>(min, max)<<std::endl;
 
-    }
 }

@@ -33,6 +33,8 @@ add_library(TdLib SHARED
         tool/random_tool.hpp
         matplotlib-cpp/matplotlibcpp.h
         openGA/openga.hpp
+        tool/random_tool.cpp tool/random_tool.h
+        slam_tool/slam_tool.cpp slam_tool/slam_tool.h slam_tool/slam_typedef.h slam_tool/draw_tool.cpp slam_tool/draw_tool.h
         )
 set(OpenCV_DIR "/usr/local/share/OpenCV")
 # OpenCV
@@ -68,11 +70,17 @@ if(OPENMP_FOUND)
 endif()
 
 #pthread
-set(THREADS_PREFER_PTHREAD_FLAG ON)
-find_package(Threads REQUIRED)
+#set(THREADS_PREFER_PTHREAD_FLAG ON)
+#find_package(Threads REQUIRED)
 
 #Boost
 find_package(Boost COMPONENTS system filesystem thread chrono REQUIRED)
+#pangolin
+find_package(Pangolin REQUIRED)
+include_directories(${Pangolin_INCLUDE_DIRS} )
+#sophus
+find_package(Sophus REQUIRED)
+include_directories(${Sophus_INCLUDE_DIRS})
 
 set(HEADER_FILES
         FileOperation/FileOperation.h
@@ -97,6 +105,10 @@ set(HEADER_FILES
         tool/random_tool.hpp
         matplotlib-cpp/matplotlibcpp.h
         openGA/openga.hpp
+        tool/random_tool.h
+        slam_tool/slam_tool.h
+        slam_tool/slam_typedef.h
+        slam_tool/draw_tool.h
         )
 set_target_properties(TdLib PROPERTIES
         PUBLIC_HEADER
@@ -107,7 +119,9 @@ target_link_libraries(TdLib
                     ${DEPENDENCIES}
                     ${OpenCV_LIBRARIES}
                     ${PCL_LIBRARIES}
-                    Threads::Threads
+                    ${Pangolin_LIBRARIES}
+                    ${Sophus_LIBRARIES}
+#                    Threads::Threads
                     )
 
 install(TARGETS TdLib

@@ -23,7 +23,7 @@ namespace td{
          * @param scene the scene view
          * @param transformation the transformation s_T_o
          */
-        void ShowAlignResult(const PointNCloudPtr object, const PointNCloudPtr scene, const Eigen::Matrix<float,4,4,Eigen::DontAlign> transformation);
+        void ShowAlignResult(const PointNCloudPtr object, const PointNCloudPtr scene, const Eigen::Matrix4d transformation);
     }//namespace pclib
 }//namesoace td
 
