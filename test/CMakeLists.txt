@@ -14,6 +14,8 @@ MESSAGE(STATUS "TdLib_INCLUDE_DIRS = " ${TdLib_INCLUDE_DIRS})
 find_package(PCL 1.8 REQUIRED)
 include_directories(${PCL_INCLUDE_DIRS})
 link_directories(${PCL_LIBRARY_DIRS})
+# 添加Eigen头文件
+include_directories( "/usr/include/eigen3" )
 #
 ## OpenCV
 #find_package(OpenCV REQUIRED)
@@ -25,13 +27,14 @@ link_directories(${PCL_LIBRARY_DIRS})
 #    MESSAGE(STATUS "OpenCV_LIBRARIES = " ${OpenCV_LIBRARIES})
 #endif()
 add_executable(LibTest main.cpp)
+
 #add_executable(ga_example ga_example.cpp)
 message(STATUS "TdLib_LIBRARIES = " ${TdLib_LIBRARIES})
-#target_link_libraries(LibTest ${TdLib_LIBRARIES}
+target_link_libraries(LibTest ${TdLib_LIBRARIES}
 #        Threads::Threads
 #        ${OpenCV_LIBRARIES}
 #        ${PCL_LIBRARIES}
-#        )
+        )
 #target_link_libraries(ga_example ${TdLib_LIBRARIES}
 #        )
 #add_executable(basic basic.cpp)

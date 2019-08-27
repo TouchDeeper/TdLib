@@ -71,6 +71,9 @@ int main(){
 
     td::DrawTrajectory(t_all);
     std::cout<<"Hello word"<<std::endl;
+    Eigen::Vector3d vec(1,1,1);
+    std::cout<<vec.norm()<<std::endl;
+    std::cout<<vec<<std::endl;
 }
 ///*******************************************************************************************/
 //void DrawTrajectory(vector<Sophus::SE3, Eigen::aligned_allocator<Sophus::SE3>> poses) {

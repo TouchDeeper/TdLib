@@ -6,6 +6,9 @@
 //#include <atomic>
 //#include "opencv2/core.hpp"
 #include <iostream>
+#include <math.h>
+#include <Eigen/Core>
+#include <eigen3/Eigen/Dense>
 using namespace std;
 int main() {
 
@@ -34,6 +37,46 @@ int main() {
     float x = 1.123456789;
     float y = 0.000123456789;
     std::cout<<x<<std::endl<<y<<std::endl;
+    int RUN_NUM = 5;
+    cout<<pow(2, (RUN_NUM-1)/2)<<endl;
+
+    Eigen::Matrix2d ma1;
+    Eigen::Matrix<double,3,2> J;
+    J << 1000,2,3,1,4,7;
+    Eigen::Vector3d f;
+    f<< 2,7,4;
+//    Eigen::Matrix3d H = J.transpose()*J;
+    Eigen::Matrix3d H;
+    Eigen::Vector3d b;
+//    Eigen::Vector3d b  = - J.transpose() * f;
+
+    H << 19.5033, 24.5025,  32.835,
+            24.5025,  32.835,    49.5,
+            32.835,    49.5,     100;
+    b << 827.953,1020.62,1373.91;
+    Eigen::Vector3d delta_x = H.ldlt().solve(b);
+    std::cout<<"delta_x : "<<std::endl<<delta_x<<std::endl;
+
+    Eigen::Vector2d jacobi_scaling = (J.array().square()).colwise().sum();
+    jacobi_scaling.array() = jacobi_scaling.array().sqrt();
+    jacobi_scaling.array()+=1;
+    jacobi_scaling.array() = jacobi_scaling.array().inverse();
+    auto diag1 = jacobi_scaling.asDiagonal();
+//    Eigen::Matrix2d H_scaled = diag1 * H * diag1;
+    Eigen::Matrix3d H_scaled;
+//    Eigen::Vector2d b_scaled = diag1 * b;
+    Eigen::Vector3d b_scaled;
+    H_scaled << 0.664829, 0.672178, 0.551119,
+                0.672178, 0.724909,  0.66863,
+                0.551119,  0.66863, 0.826446;
+    std::cout<<"H_scaled:\n"<<H_scaled<<std::endl;
+    b_scaled << 152.864,151.647,124.901;
+    Eigen::Vector3d scaled_vec;
+    scaled_vec << 0.184629, 0.148584, 0.0909091;
+    auto diag2 = scaled_vec.asDiagonal();
+    Eigen::Vector3d delta_x_scaled = H_scaled.ldlt().solve(b_scaled);
+    Eigen::Vector3d delta_x_2 = diag2 * delta_x_scaled;
+    std::cout<<"delta_x2 = "<<std::endl<<delta_x_2<<std::endl;
 
 
 }

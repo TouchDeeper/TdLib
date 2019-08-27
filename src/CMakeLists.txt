@@ -34,7 +34,9 @@ add_library(TdLib SHARED
         matplotlib-cpp/matplotlibcpp.h
         openGA/openga.hpp
         tool/random_tool.cpp tool/random_tool.h
-        slam_tool/slam_tool.cpp slam_tool/slam_tool.h slam_tool/slam_typedef.h slam_tool/draw_tool.cpp slam_tool/draw_tool.h
+        tool/tic_toc.h
+        slam_tool/slam_tool.cpp slam_tool/slam_tool.h slam_tool/slam_typedef.h
+#        slam_tool/draw_tool.cpp slam_tool/draw_tool.h
         )
 set(OpenCV_DIR "/usr/local/share/OpenCV")
 # OpenCV
@@ -76,8 +78,8 @@ endif()
 #Boost
 find_package(Boost COMPONENTS system filesystem thread chrono REQUIRED)
 #pangolin
-find_package(Pangolin REQUIRED)
-include_directories(${Pangolin_INCLUDE_DIRS} )
+#find_package(Pangolin REQUIRED)
+#include_directories(${Pangolin_INCLUDE_DIRS} )
 #sophus
 find_package(Sophus REQUIRED)
 include_directories(${Sophus_INCLUDE_DIRS})
@@ -106,23 +108,30 @@ set(HEADER_FILES
         matplotlib-cpp/matplotlibcpp.h
         openGA/openga.hpp
         tool/random_tool.h
+        tool/tic_toc.h
         slam_tool/slam_tool.h
         slam_tool/slam_typedef.h
-        slam_tool/draw_tool.h
+#        slam_tool/draw_tool.h
         )
 set_target_properties(TdLib PROPERTIES
         PUBLIC_HEADER
         "${HEADER_FILES}"
         )
 
-target_link_libraries(TdLib
+target_link_libraries(TdLib PRIVATE
                     ${DEPENDENCIES}
                     ${OpenCV_LIBRARIES}
                     ${PCL_LIBRARIES}
-                    ${Pangolin_LIBRARIES}
+#                    ${Pangolin_LIBRARIES}
                     ${Sophus_LIBRARIES}
 #                    Threads::Threads
                     )
+#set(INSTALL_LIB_DIR "${PROJECT_BINARY_DIR}/lib") # 假设安装目录在编译目录的lib子目录内
+
+set(CMAKE_SKIP_BUILD_RPATH FALSE)
+set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)
+set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
 install(TARGETS TdLib
         # IMPORTANT: Add the foo library to the "export-set"
