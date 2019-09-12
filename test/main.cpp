@@ -2,6 +2,8 @@
 //#include "TdLibrary/realsense.h"
 //#include "TdLibrary/threadSafeStructure.h"
 //#include "TdLibrary/random_tool.hpp"
+#include "TdLibrary/loss_function.h"
+
 //#include <thread>
 //#include <atomic>
 //#include "opencv2/core.hpp"
@@ -34,6 +36,8 @@ int main() {
 //            std::cout<<" main thread push value "<<i<<std::endl;
 //        }
 //    t2.join();
+    td::slam::backend::CauchyLoss robust_function(1);
+
     float x = 1.123456789;
     float y = 0.000123456789;
     std::cout<<x<<std::endl<<y<<std::endl;
@@ -47,36 +51,54 @@ int main() {
     f<< 2,7,4;
 //    Eigen::Matrix3d H = J.transpose()*J;
     Eigen::Matrix3d H;
+    Eigen::Matrix3d H2;
     Eigen::Vector3d b;
 //    Eigen::Vector3d b  = - J.transpose() * f;
 
     H << 19.5033, 24.5025,  32.835,
             24.5025,  32.835,    49.5,
             32.835,    49.5,     100;
-    b << 827.953,1020.62,1373.91;
-    Eigen::Vector3d delta_x = H.ldlt().solve(b);
-    std::cout<<"delta_x : "<<std::endl<<delta_x<<std::endl;
+    H2 << 19.5033, 24.5025,  32.835,
+            24.5025,  32.835,    49.5,
+            32.835,    49.5,     100;
 
-    Eigen::Vector2d jacobi_scaling = (J.array().square()).colwise().sum();
-    jacobi_scaling.array() = jacobi_scaling.array().sqrt();
-    jacobi_scaling.array()+=1;
-    jacobi_scaling.array() = jacobi_scaling.array().inverse();
-    auto diag1 = jacobi_scaling.asDiagonal();
-//    Eigen::Matrix2d H_scaled = diag1 * H * diag1;
-    Eigen::Matrix3d H_scaled;
-//    Eigen::Vector2d b_scaled = diag1 * b;
-    Eigen::Vector3d b_scaled;
-    H_scaled << 0.664829, 0.672178, 0.551119,
-                0.672178, 0.724909,  0.66863,
-                0.551119,  0.66863, 0.826446;
-    std::cout<<"H_scaled:\n"<<H_scaled<<std::endl;
-    b_scaled << 152.864,151.647,124.901;
-    Eigen::Vector3d scaled_vec;
-    scaled_vec << 0.184629, 0.148584, 0.0909091;
-    auto diag2 = scaled_vec.asDiagonal();
-    Eigen::Vector3d delta_x_scaled = H_scaled.ldlt().solve(b_scaled);
-    Eigen::Vector3d delta_x_2 = diag2 * delta_x_scaled;
-    std::cout<<"delta_x2 = "<<std::endl<<delta_x_2<<std::endl;
+    b << 827.953,1020.62,1373.91;
+    auto diag1 = H.diagonal();
+    auto D = diag1.array().sqrt();
+    std::cout<<D<<std::endl;
+//    H += diag1.asDiagonal();
+//    H(0,0) += 1;
+//    diag1.asDiagonal().toDenseMatrix()(0,0) += 1;
+//    diag1(0) += 1;
+//    std::cout<<diag1(0)<<std::endl;
+    std::cout<<H<<std::endl;
+//    diag1 = diag1.array().sqrt();
+//    diag1.array() += 1;
+//    diag1 = diag1.array().inverse();
+//    std::cout<<diag1.segment(0,2)<<std::endl;
+//    Eigen::Vector3d delta_x = H.ldlt().solve(b);
+//    std::cout<<"delta_x : "<<std::endl<<delta_x<<std::endl;
+//
+//    Eigen::Vector2d jacobi_scaling = (J.array().square()).colwise().sum();
+//    jacobi_scaling.array() = jacobi_scaling.array().sqrt();
+//    jacobi_scaling.array()+=1;
+//    jacobi_scaling.array() = jacobi_scaling.array().inverse();
+//    auto diag1 = jacobi_scaling.asDiagonal();
+////    Eigen::Matrix2d H_scaled = diag1 * H * diag1;
+//    Eigen::Matrix3d H_scaled;
+////    Eigen::Vector2d b_scaled = diag1 * b;
+//    Eigen::Vector3d b_scaled;
+//    H_scaled << 0.664829, 0.672178, 0.551119,
+//                0.672178, 0.724909,  0.66863,
+//                0.551119,  0.66863, 0.826446;
+//    std::cout<<"H_scaled:\n"<<H_scaled<<std::endl;
+//    b_scaled << 152.864,151.647,124.901;
+//    Eigen::Vector3d scaled_vec;
+//    scaled_vec << 0.184629, 0.148584, 0.0909091;
+//    auto diag2 = scaled_vec.asDiagonal();
+//    Eigen::Vector3d delta_x_scaled = H_scaled.ldlt().solve(b_scaled);
+//    Eigen::Vector3d delta_x_2 = diag2 * delta_x_scaled;
+//    std::cout<<"delta_x2 = "<<std::endl<<delta_x_2<<std::endl;
 
 
 }

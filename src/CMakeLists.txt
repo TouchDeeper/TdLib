@@ -21,6 +21,8 @@ add_library(TdLib SHARED
         PCL/global_feature.h
         PCL/local_features.cpp
         PCL/local_features.h
+        PCL/Viewer.cpp
+        PCL/Viewer.h
         GALGO-2.0/src/Chromosome.hpp
         GALGO-2.0/src/Converter.hpp
         GALGO-2.0/src/Evolution.hpp
@@ -37,6 +39,9 @@ add_library(TdLib SHARED
         tool/tic_toc.h
         slam_tool/slam_tool.cpp slam_tool/slam_tool.h slam_tool/slam_typedef.h
 #        slam_tool/draw_tool.cpp slam_tool/draw_tool.h
+        slam_tool/backend/loss_function.cc slam_tool/backend/loss_function.h
+        slam_tool/backend/eigen_types.h
+        algorithm_data_structure/sort.cpp algorithm_data_structure/sort.h
         )
 set(OpenCV_DIR "/usr/local/share/OpenCV")
 # OpenCV
@@ -50,7 +55,7 @@ if(OpenCV_FOUND)
 endif()
 
 # Eigen
-include_directories( "/usr/include/eigen3" )
+include_directories("/usr/include/eigen3" )
 
 #PCL
 find_package(PCL 1.8 REQUIRED)
@@ -96,6 +101,7 @@ set(HEADER_FILES
         PCL/keypoint.h
         PCL/global_feature.h
         PCL/local_features.h
+        PCL/Viewer.h
         GALGO-2.0/src/Chromosome.hpp
         GALGO-2.0/src/Converter.hpp
         GALGO-2.0/src/Evolution.hpp
@@ -112,6 +118,9 @@ set(HEADER_FILES
         slam_tool/slam_tool.h
         slam_tool/slam_typedef.h
 #        slam_tool/draw_tool.h
+        slam_tool/backend/loss_function.h
+        slam_tool/backend/eigen_types.h
+        algorithm_data_structure/sort.h
         )
 set_target_properties(TdLib PROPERTIES
         PUBLIC_HEADER
@@ -140,3 +149,13 @@ install(TARGETS TdLib
         LIBRARY DESTINATION "${INSTALL_LIB_DIR}" COMPONENT shlib
         PUBLIC_HEADER DESTINATION "${INSTALL_INCLUDE_DIR}/TdLibrary"
         COMPONENT dev)
+# uninstall target
+if(NOT TARGET uninstall)
+    configure_file(
+            "${PROJECT_SOURCE_DIR}/cmake_uninstall.cmake.in"
+            "${PROJECT_SOURCE_DIR}/cmake_uninstall.cmake"
+            IMMEDIATE @ONLY)
+
+    add_custom_target(uninstall
+            COMMAND ${CMAKE_COMMAND} -P ${PROJECT_SOURCE_DIR}/cmake_uninstall.cmake)
+endif()
