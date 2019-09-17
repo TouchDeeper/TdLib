@@ -41,7 +41,9 @@ add_library(TdLib SHARED
 #        slam_tool/draw_tool.cpp slam_tool/draw_tool.h
         slam_tool/backend/loss_function.cc slam_tool/backend/loss_function.h
         slam_tool/backend/eigen_types.h
+        slam_tool/motion_transformation.cpp slam_tool/motion_transformation.h
         algorithm_data_structure/sort.cpp algorithm_data_structure/sort.h
+
         )
 set(OpenCV_DIR "/usr/local/share/OpenCV")
 # OpenCV
@@ -121,6 +123,7 @@ set(HEADER_FILES
         slam_tool/backend/loss_function.h
         slam_tool/backend/eigen_types.h
         algorithm_data_structure/sort.h
+        slam_tool/motion_transformation.h
         )
 set_target_properties(TdLib PROPERTIES
         PUBLIC_HEADER

@@ -10,6 +10,7 @@
 #include <iostream>
 #include <math.h>
 #include <Eigen/Core>
+#include <Eigen/Geometry>
 #include <eigen3/Eigen/Dense>
 using namespace std;
 int main() {
@@ -99,6 +100,12 @@ int main() {
 //    Eigen::Vector3d delta_x_scaled = H_scaled.ldlt().solve(b_scaled);
 //    Eigen::Vector3d delta_x_2 = diag2 * delta_x_scaled;
 //    std::cout<<"delta_x2 = "<<std::endl<<delta_x_2<<std::endl;
-
+    Eigen::Quaterniond q1(0.35, 0.2, 0.3, 0.1);
+    q1.normalize();
+    Eigen::Matrix3d o1_R_o2 = q1.toRotationMatrix();
+    std::cout<<"o1_R_o2:"<<o1_R_o2<<std::endl;
+    Eigen::Vector3d o1_euler_angle_o2_ = o1_R_o2.eulerAngles(2,1,0);
+    Eigen::Matrix3d o1_R_on = (Eigen::AngleAxisd(o1_euler_angle_o2_[0],Eigen::Vector3d::UnitZ())*Eigen::AngleAxisd(o1_euler_angle_o2_[1],Eigen::Vector3d::UnitY())*Eigen::AngleAxisd(o1_euler_angle_o2_[2],Eigen::Vector3d::UnitX())).matrix();
+    std::cout<<"o1_R_on:"<<o1_R_on<<std::endl;
 
 }
