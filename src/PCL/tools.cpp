@@ -117,9 +117,9 @@ namespace td{
         * @param scene the scene view
         * @param transformation the transformation s_T_o
         */
-        void ShowAlignResult(const PointNCloudPtr object, const PointNCloudPtr scene, const Eigen::Matrix4d transformation){
-            pcl::visualization::PCLVisualizer viewer ("align");
-            viewer.addText ("align", 10, 10, 18, 1.0, 1.0, 1.0, "text1");
+        void ShowAlignResult(const PointNCloudPtr object, const PointNCloudPtr scene, const Eigen::Matrix4d transformation,std::string viewer_name){
+            pcl::visualization::PCLVisualizer viewer (viewer_name);
+            viewer.addText (viewer_name, 10, 10, 18, 1.0, 1.0, 1.0, "text1");
             viewer.addCoordinateSystem (0.03);
             viewer.addPointCloud<PointN>(scene,"scene_view");
             PointNCloudPtr model_view_transformed(new PointNCloud);

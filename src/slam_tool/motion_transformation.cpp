@@ -10,5 +10,11 @@ namespace td{
         Sophus::SE3 o1_T_on_sop(o1_R_on,Eigen::Vector3d(o1_euler_angle_on[0],o1_euler_angle_on[1],o1_euler_angle_on[2]));
         return o1_T_on_sop;
     }
+    Sophus::SE3 EulerTranslatetoSE3(Eigen::Vector3d euler_angle, Eigen::Vector3d translate){
+        Eigen::Matrix3d o1_R_on = (Eigen::AngleAxisd(euler_angle[0],Eigen::Vector3d::UnitZ())*Eigen::AngleAxisd(euler_angle[1],Eigen::Vector3d::UnitY())*Eigen::AngleAxisd(euler_angle[2],Eigen::Vector3d::UnitX())).matrix();
+        Sophus::SE3 o1_T_on_sop(o1_R_on,translate);
+        return o1_T_on_sop;
+
+    }
 
 }//namespace td
