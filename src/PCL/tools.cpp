@@ -125,8 +125,8 @@ namespace td{
             PointNCloudPtr model_view_transformed(new PointNCloud);
             pcl::transformPointCloud(*object, *model_view_transformed, transformation);
             viewer.addPointCloud<PointN>(model_view_transformed,ColorHandlerT (model_view_transformed, 0.0, 255.0, 0.0),"model_view");
-            while (!viewer.wasStopped())
-                viewer.spin();
+            viewer.spin();
+            viewer.close();
         }
     }
 

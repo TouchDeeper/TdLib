@@ -43,6 +43,7 @@ add_library(TdLib SHARED
         slam_tool/backend/eigen_types.h
         slam_tool/motion_transformation.cpp slam_tool/motion_transformation.h
         algorithm_data_structure/sort.cpp algorithm_data_structure/sort.h
+        td_eigen/eigen_common_typedef.h
 
         )
 set(OpenCV_DIR "/usr/local/share/OpenCV")
@@ -124,6 +125,7 @@ set(HEADER_FILES
         slam_tool/backend/eigen_types.h
         algorithm_data_structure/sort.h
         slam_tool/motion_transformation.h
+        td_eigen/eigen_common_typedef.h
         )
 set_target_properties(TdLib PROPERTIES
         PUBLIC_HEADER
