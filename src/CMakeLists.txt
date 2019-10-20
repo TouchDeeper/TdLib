@@ -34,7 +34,7 @@ add_library(TdLib SHARED
         GALGO-2.0/src/Randomize.hpp
         tool/random_tool.hpp
         matplotlib-cpp/matplotlibcpp.h
-        openGA/openga.hpp
+        openGA/src/openga.hpp
         tool/random_tool.cpp tool/random_tool.h
         tool/tic_toc.h
         slam_tool/slam_tool.cpp slam_tool/slam_tool.h slam_tool/slam_typedef.h
@@ -116,7 +116,7 @@ set(HEADER_FILES
         GALGO-2.0/src/Randomize.hpp
         tool/random_tool.hpp
         matplotlib-cpp/matplotlibcpp.h
-        openGA/openga.hpp
+        openGA/src/openga.hpp
         tool/random_tool.h
         tool/tic_toc.h
         slam_tool/slam_tool.h

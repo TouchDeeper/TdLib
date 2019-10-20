@@ -1,0 +1,3 @@
+[submodule "src/openGA"]
+	path = src/openGA
+	url = https://github.com/TouchDeeper/openGA.git
