@@ -17,6 +17,7 @@ namespace td{
          * @param leaf_size set the size of every square voxel
          */
         void DownsamplingSquareLeaf(PointCloudPtr model, float leaf_size);
+        void DownsamplingSquareLeaf(PointNCloudPtr model, float leaf_size);
         /**
          * upsamling the cloud
          * @param model input cloud

@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.9)
 project(TdLib)
+set(CMAKE_BUILD_TYPE "Release")
 set(${PROJECT_NAME}_MAJOR_VERSION 0)
 set(${PROJECT_NAME}_MINOR_VERSION 1)
 set(${PROJECT_NAME}_PATCH_VERSION 0)

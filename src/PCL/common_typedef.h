@@ -64,6 +64,7 @@ namespace td{
         typedef pcl::PointCloud<pcl::PointXYZRGBA>::Ptr PointRGBACloudPtr;
         typedef pcl::PointCloud<pcl::PointNormal> PointNCloud;
         typedef pcl::PointCloud<pcl::PointNormal>::Ptr PointNCloudPtr;
+        typedef std::vector<pcl::PointCloud<pcl::PointNormal>::Ptr> VecPointNCloudPtr;
 
         typedef pcl::FPFHSignature33 FpfhDescriptor;
         typedef pcl::PointCloud<FpfhDescriptor> FpfhDescriptorCloud;

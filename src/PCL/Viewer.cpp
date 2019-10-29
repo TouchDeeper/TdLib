@@ -5,8 +5,8 @@
 #include "Viewer.h"
 namespace td{
     namespace pclib{
-        void Viewer::ShowCorrespondence(const std::pair<std::vector<std::vector<int>>,float>* correspondence, const PointNCloudPtr model_view, const PointNCloudPtr scene_view,
-        const Eigen::Matrix4d transformations,ColorHandlerPointN scene_view_color, ColorHandlerPointN model_view_color,std::vector<int> window_size,double point_size,std::vector<int> background_rgb)
+        void Viewer::ShowCorrespondence(const std::pair<std::vector<std::vector<int>>,float>* correspondence, const PointNCloudPtr source_view, const PointNCloudPtr target_view,
+        const Eigen::Matrix4d transformations,ColorHandlerPointN target_view_color, ColorHandlerPointN source_view_color,std::vector<int> window_size,double point_size,std::vector<int> background_rgb)
         {
 
             pcl::visualization::PCLVisualizer viewer ("Correspondence Grouping");
@@ -22,9 +22,9 @@ namespace td{
             viewer.addText ("align", 10, 10, 18, 1.0, 1.0, 1.0, "text1", vp_1);
 
             viewer.addCoordinateSystem (0.03);
-            scene_view_color.setInputCloud(scene_view);
-//            viewer.addPointCloud<PointN>(scene_view,ColorHandlerPointN (scene_view,scene_view_color[0], scene_view_color[1], scene_view_color[2]),"scene_view_vp1",vp_1);
-            viewer.addPointCloud<PointN>(scene_view,scene_view_color,"scene_view_vp1",vp_1);
+            target_view_color.setInputCloud(target_view);
+//            viewer.addPointCloud<PointN>(scene_view,ColorHandlerPointN (scene_view,target_view_color[0], target_view_color[1], target_view_color[2]),"scene_view_vp1",vp_1);
+            viewer.addPointCloud<PointN>(target_view,target_view_color,"scene_view_vp1",vp_1);
             viewer.setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, point_size, "scene_view_vp1",vp_1);
 
             PointCloudPtr sampling_keypoints(new PointCloud);
@@ -33,10 +33,10 @@ namespace td{
             viewer.removePointCloud("model_view");
             PointNCloudPtr model_view_transformed(new PointNCloud);
 //            std::cout<<transformations<<std::endl;
-            pcl::transformPointCloud(*model_view, *model_view_transformed, transformations);
-            model_view_color.setInputCloud(model_view_transformed);
-//            viewer.addPointCloud<PointN>(model_view_transformed,ColorHandlerPointN (model_view_transformed,model_view_color[0], model_view_color[1], model_view_color[2]),"model_view",vp_1);
-            viewer.addPointCloud<PointN>(model_view_transformed,model_view_color,"model_view",vp_1);
+            pcl::transformPointCloud(*source_view, *model_view_transformed, transformations);
+            source_view_color.setInputCloud(model_view_transformed);
+//            viewer.addPointCloud<PointN>(model_view_transformed,ColorHandlerPointN (model_view_transformed,source_view_color[0], source_view_color[1], source_view_color[2]),"model_view",vp_1);
+            viewer.addPointCloud<PointN>(model_view_transformed,source_view_color,"model_view",vp_1);
             viewer.setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, point_size, "model_view",vp_1);
 
             //viewport 2
@@ -45,8 +45,8 @@ namespace td{
             viewer.removeAllShapes(vp_2);
 
             viewer.addText ("correspondence", 10, 10, 18, 1.0, 1.0, 1.0, "text2", vp_2);
-//            viewer.addPointCloud<PointN>(scene_view,ColorHandlerPointN (scene_view_color[0], scene_view_color[1], scene_view_color[2]),"scene_view_vp2",vp_2);
-            viewer.addPointCloud<PointN>(scene_view,scene_view_color,"scene_view_vp2",vp_2);
+//            viewer.addPointCloud<PointN>(scene_view,ColorHandlerPointN (target_view_color[0], target_view_color[1], target_view_color[2]),"scene_view_vp2",vp_2);
+            viewer.addPointCloud<PointN>(target_view,target_view_color,"scene_view_vp2",vp_2);
             viewer.setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, point_size, "scene_view_vp2",vp_2);
 
             PointNCloudPtr model_view_transformed_translation(new PointNCloud);
@@ -56,9 +56,9 @@ namespace td{
             translation(2,3) = 0.05;
             pcl::transformPointCloud(*model_view_transformed, *model_view_transformed_translation,translation);//translate the model_view for drawing the correspondence line
 
-            model_view_color.setInputCloud(model_view_transformed_translation);
-//            viewer.addPointCloud<PointN>(model_view_transformed_translation,ColorHandlerPointN (model_view_transformed,model_view_color[0], model_view_color[1], model_view_color[2]),"model_view_translation",vp_2);
-            viewer.addPointCloud<PointN>(model_view_transformed_translation,model_view_color,"model_view_translation",vp_2);
+            source_view_color.setInputCloud(model_view_transformed_translation);
+//            viewer.addPointCloud<PointN>(model_view_transformed_translation,ColorHandlerPointN (model_view_transformed,source_view_color[0], source_view_color[1], source_view_color[2]),"model_view_translation",vp_2);
+            viewer.addPointCloud<PointN>(model_view_transformed_translation,source_view_color,"model_view_translation",vp_2);
             viewer.setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, point_size, "model_view_translation",vp_2);
 
             for (int i = 0; i < (*correspondence).first[0].size(); ++i) {
@@ -71,9 +71,9 @@ namespace td{
                 sampling_keypoints->push_back(model_point);
 
                 pcl::PointXYZ scene_point;
-                scene_point.x = (scene_view->at(correspondence->first[1][i])).x;
-                scene_point.y = (scene_view->at(correspondence->first[1][i])).y;
-                scene_point.z = (scene_view->at(correspondence->first[1][i])).z;
+                scene_point.x = (target_view->at(correspondence->first[1][i])).x;
+                scene_point.y = (target_view->at(correspondence->first[1][i])).y;
+                scene_point.z = (target_view->at(correspondence->first[1][i])).z;
                 match_keypoints->push_back(scene_point);
 
                 //  We are drawing a line for each pair of clustered correspondences found between the model and the scene

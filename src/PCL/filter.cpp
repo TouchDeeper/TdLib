@@ -52,6 +52,17 @@ namespace td{
             filter.filter(*model);
             std::cerr << "after downsamplling, cloud has" << (*model).points.size () << " data points." << std::endl;
         }
+        void DownsamplingSquareLeaf(PointNCloudPtr model, float leaf_size)
+        {
+            std::cerr << "before downsamplling, cloud has" << (*model).points.size () << " data points." << std::endl;
+            pcl::VoxelGrid<pcl::PointNormal> filter;
+            filter.setInputCloud(model);
+            // We set the size of every voxel to be 1x1x1cm
+            // (only one point per every cubic centimeter will survive).
+            filter.setLeafSize(leaf_size, leaf_size, leaf_size);
+            filter.filter(*model);
+            std::cerr << "after downsamplling, cloud has" << (*model).points.size () << " data points." << std::endl;
+        }
 
         /**
          * upsamling the cloud

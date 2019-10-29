@@ -10,10 +10,10 @@
 namespace td{
     /**
      * get a random value between min and max
-     * @tparam T type of data
+     * @tparam T type of data, can't be int
      * @param min
      * @param max
-     * @return a random value between min and max
+     * @return a random value between min and max. if you need return int type, you can use int(UniformSampling)
      */
     template <class T> T UniformSampling(T min, T max)
     {

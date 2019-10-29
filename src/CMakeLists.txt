@@ -23,6 +23,8 @@ add_library(TdLib SHARED
         PCL/local_features.h
         PCL/Viewer.cpp
         PCL/Viewer.h
+        PCL/icp_related.cpp
+        PCL/icp_related.h
         GALGO-2.0/src/Chromosome.hpp
         GALGO-2.0/src/Converter.hpp
         GALGO-2.0/src/Evolution.hpp
@@ -106,6 +108,7 @@ set(HEADER_FILES
         PCL/global_feature.h
         PCL/local_features.h
         PCL/Viewer.h
+        PCL/icp_related.h
         GALGO-2.0/src/Chromosome.hpp
         GALGO-2.0/src/Converter.hpp
         GALGO-2.0/src/Evolution.hpp
