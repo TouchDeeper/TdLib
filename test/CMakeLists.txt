@@ -34,16 +34,27 @@ if(OPENMP_FOUND)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
     set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
 endif()
+#sophus
+find_package(Sophus REQUIRED)
+include_directories(${Sophus_INCLUDE_DIRS})
 
 add_executable(LibTest main.cpp)
 
 #add_executable(ga_example ga_example.cpp)
 message(STATUS "TdLib_LIBRARIES = " ${TdLib_LIBRARIES})
 target_link_libraries(LibTest ${TdLib_LIBRARIES}
+        ${Sophus_LIBRARIES}
 #        Threads::Threads
 #        ${OpenCV_LIBRARIES}
 #        ${PCL_LIBRARIES}
         )
+
+add_executable(sophus_test sophus_test.cpp)
+target_link_libraries(sophus_test ${TdLib_LIBRARIES}
+        ${Sophus_LIBRARIES})
+
+add_executable(dynamic_iter dynamic_iter.cpp)
+
 #target_link_libraries(ga_example ${TdLib_LIBRARIES}
 #        )
 #add_executable(basic basic.cpp)
@@ -52,14 +63,13 @@ target_link_libraries(LibTest ${TdLib_LIBRARIES}
 #add_executable(example_so1 openGA/example_so1.cpp openGA/openga_class.cpp openGA/openga_class.h)
 #target_link_libraries(example_so1 ${TdLib_LIBRARIES}
 #        )
-add_executable(openga_class_test openGA/openga_class_test.cpp openGA/openga_class.cpp openGA/openga_class.h)
-target_link_libraries(openga_class_test ${TdLib_LIBRARIES})
-
-add_executable(random_test random_test.cpp)
-target_link_libraries(random_test ${TdLib_LIBRARIES})
+#add_executable(openga_class_test openGA/openga_class_test.cpp openGA/openga_class.cpp openGA/openga_class.h)
+#target_link_libraries(openga_class_test ${TdLib_LIBRARIES})
+#
+#add_executable(random_test random_test.cpp)
+#target_link_libraries(random_test ${TdLib_LIBRARIES})
 
 #find_package(Pangolin REQUIRED)
-#find_package(Sophus REQUIRED)
 #include_directories(${Pangolin_INCLUDE_DIRS} ${Sophus_INCLUDE_DIRS})
 #add_executable(pangolin_test pangolin_test.cpp)
 #target_link_libraries(pangolin_test ${Pangolin_LIBRARIES} ${Sophus_LIBRARIES} ${TdLib_LIBRARIES})

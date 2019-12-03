@@ -10,8 +10,10 @@ add_library(TdLib SHARED
         FileOperation/keyboard.h
         PCL/filter.cpp
         PCL/filter.h
+        PCL/filter.hpp
         PCL/enveloping.cpp
         PCL/enveloping.h
+        PCL/enveloping.hpp
         PCL/tools.cpp
         PCL/tools.h
         PCL/common_typedef.h
@@ -46,6 +48,10 @@ add_library(TdLib SHARED
         slam_tool/motion_transformation.cpp slam_tool/motion_transformation.h
         algorithm_data_structure/sort.cpp algorithm_data_structure/sort.h
         td_eigen/eigen_common_typedef.h
+        td_eigen/AXeqB.cpp
+        td_eigen/AXeqB.h
+        td_eigen/eigen_tools.cpp
+        td_eigen/eigen_tools.hpp
         td_sophus/sophus_typedef.h
 
         )
@@ -101,7 +107,9 @@ set(HEADER_FILES
         threadSafeStructure/threadSafeStructure.h
         FileOperation/keyboard.h
         PCL/filter.h
+        PCL/filter.hpp
         PCL/enveloping.h
+        PCL/enveloping.hpp
         PCL/tools.h
         PCL/common_typedef.h
         PCL/keypoint.h
@@ -130,7 +138,10 @@ set(HEADER_FILES
         algorithm_data_structure/sort.h
         slam_tool/motion_transformation.h
         td_eigen/eigen_common_typedef.h
-        td_sophus/sophus_typedef.h;
+        td_eigen/AXeqB.h
+        td_eigen/eigen_tools.h
+        td_eigen/eigen_tools.hpp
+        td_sophus/sophus_typedef.h
         )
 set_target_properties(TdLib PROPERTIES
         PUBLIC_HEADER

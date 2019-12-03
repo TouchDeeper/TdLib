@@ -45,13 +45,13 @@ namespace td{
         * @param inlier_squared_threshold squared distance threshold for inlier check
         * @param inlier_fraction inlier_size/input_source->size
         * @param inlier_size
-        * @param fitness_score
+        * @param error
         * @param tg_T_sr transformation from source to target
         */
         void getFitness(PointNCloudPtr input_source, pcl::search::KdTree<pcl::PointNormal> target_cloud_kdtree_,
                         double inlier_squared_threshold,
                         double& inlier_fraction, int& inlier_size,
-                        float& fitness_score, Eigen::Matrix4d tg_T_sr);
+                        float& error, Eigen::Matrix4d tg_T_sr);
         /**
         * get outlier cloud after the souce be registered to the target
         * @param input_source source cloud

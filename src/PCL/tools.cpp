@@ -189,6 +189,8 @@ namespace td{
             viewer.createViewPort (0.0, 0, 0.5, 1.0, vp_1);
             viewer.createViewPort (0.5, 0, 1.0, 1.0, vp_2);
             viewer.setBackgroundColor(background_color[0],background_color[1],background_color[2],vp_1);
+            viewer.setBackgroundColor(background_color[0],background_color[1],background_color[2],vp_2);
+
             if(!(window_size[0] == 0 || window_size[1] == 0))
                 viewer.setSize(window_size[0],window_size[1]);
             //viewport 1
@@ -228,20 +230,20 @@ namespace td{
          * @param inlier_squared_threshold squared distance threshold for inlier check
          * @param inlier_fraction inlier_size/input_source->size
          * @param inlier_size
-         * @param fitness_score
+         * @param error
          * @param tg_T_sr transformation from source to target
          */
         void getFitness(PointNCloudPtr input_source, pcl::search::KdTree<pcl::PointNormal> target_cloud_kdtree_,
                 double inlier_squared_threshold,
                 double& inlier_fraction, int& inlier_size,
-                float& fitness_score, Eigen::Matrix4d tg_T_sr) {
+                float& error, Eigen::Matrix4d tg_T_sr) {
             // Initialize variables
             std::vector<int> inliers;
             inliers.reserve (input_source->size ());
-            fitness_score = 0.0f;
+            error = 0.0f;
 
             // Transform the input dataset using the population transformation
-            td::pclib::PointNCloudPtr source_transformed(new td::pclib::PointNCloud);
+            PointNCloudPtr source_transformed(new PointNCloud);
 //    source_transformed->resize (target_cloud_->size ());
             pcl::transformPointCloud (*input_source, *source_transformed, tg_T_sr);
 
@@ -260,15 +262,15 @@ namespace td{
                     inliers.push_back (static_cast<int> (i));
 
                     // Update fitness score
-                    fitness_score += nn_dists[0];
+                    error += nn_dists[0];
                 }
             }
 
             // Calculate MSE
             if (inliers.size () > 0)
-                fitness_score /= static_cast<float> (inliers.size ());
+                error /= static_cast<float> (inliers.size ());
             else
-                fitness_score = std::numeric_limits<float>::max ();
+                error = std::numeric_limits<float>::max ();
             inlier_fraction = static_cast<float> (inliers.size ()) / static_cast<float> (input_source->size ());
             inlier_size = inliers.size();
         }

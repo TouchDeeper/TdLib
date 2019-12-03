@@ -6,7 +6,7 @@
 namespace td{
     namespace pclib{
         void Viewer::ShowCorrespondence(const std::pair<std::vector<std::vector<int>>,float>* correspondence, const PointNCloudPtr source_view, const PointNCloudPtr target_view,
-        const Eigen::Matrix4d transformations,ColorHandlerPointN target_view_color, ColorHandlerPointN source_view_color,std::vector<int> window_size,double point_size,std::vector<int> background_rgb)
+        const Eigen::Matrix4d transformations,ColorHandlerPointN target_view_color, ColorHandlerPointN source_view_color,std::vector<int> line_rgb,std::vector<int> window_size,double point_size,std::vector<int> background_rgb)
         {
 
             pcl::visualization::PCLVisualizer viewer ("Correspondence Grouping");
@@ -77,7 +77,8 @@ namespace td{
                 match_keypoints->push_back(scene_point);
 
                 //  We are drawing a line for each pair of clustered correspondences found between the model and the scene
-                viewer.addLine<pcl::PointXYZ, pcl::PointXYZ> (model_point, scene_point, 0, 255, 0, ss_line.str (), vp_2);
+                viewer.addLine<pcl::PointXYZ, pcl::PointXYZ> (model_point, scene_point, line_rgb[0], line_rgb[1], line_rgb[2], ss_line.str (), vp_2);
+                viewer.setShapeRenderingProperties (pcl::visualization::PCL_VISUALIZER_LINE_WIDTH, point_size/2, ss_line.str (),vp_1);
 
             }
             //show keypoints
