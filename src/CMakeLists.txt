@@ -1,61 +1,111 @@
 set(DEPENDENCIES realsense2 )
-add_library(TdLib SHARED
-        threadSafeStructure/threadSafeStructure.cpp
-        threadSafeStructure/threadSafeStructure.h
-        realsense/realsense.cpp
-        realsense/realsense.h
-        FileOperation/FileOperation.cpp
-        FileOperation/FileOperation.h
-        FileOperation/keyboard.cpp
-        FileOperation/keyboard.h
-        PCL/filter.cpp
-        PCL/filter.h
-        PCL/filter.hpp
-        PCL/enveloping.cpp
-        PCL/enveloping.h
-        PCL/enveloping.hpp
-        PCL/tools.cpp
-        PCL/tools.h
-        PCL/common_typedef.h
-        PCL/keypoint.cpp
-        PCL/keypoint.h
-        PCL/global_feeature.cpp
-        PCL/global_feature.h
-        PCL/local_features.cpp
-        PCL/local_features.h
-        PCL/Viewer.cpp
-        PCL/Viewer.h
-        PCL/icp_related.cpp
-        PCL/icp_related.h
-        GALGO-2.0/src/Chromosome.hpp
-        GALGO-2.0/src/Converter.hpp
-        GALGO-2.0/src/Evolution.hpp
-        GALGO-2.0/src/example.cpp
-        GALGO-2.0/src/Galgo.hpp
-        GALGO-2.0/src/GeneticAlgorithm.hpp
-        GALGO-2.0/src/Parameter.hpp
-        GALGO-2.0/src/Population.hpp
-        GALGO-2.0/src/Randomize.hpp
-        tool/random_tool.hpp
-        matplotlib-cpp/matplotlibcpp.h
-        openGA/src/openga.hpp
-        tool/random_tool.cpp tool/random_tool.h
-        tool/tic_toc.h
-        slam_tool/slam_tool.cpp slam_tool/slam_tool.h slam_tool/slam_typedef.h
-        slam_tool/2d_slam/2d_slam_tool.cpp slam_tool/2d_slam/2d_slam_tool.h
-#        slam_tool/draw_tool.cpp slam_tool/draw_tool.h
-        slam_tool/backend/loss_function.cc slam_tool/backend/loss_function.h
-        slam_tool/motion_transformation.cpp slam_tool/motion_transformation.h
-        algorithm_data_structure/sort.cpp algorithm_data_structure/sort.h
-        td_eigen/eigen_common_typedef.h
-        td_eigen/AXeqB.cpp
-        td_eigen/AXeqB.h
-        td_eigen/eigen_tools.cpp
-        td_eigen/eigen_tools.hpp
-        td_sophus/sophus_typedef.h
-        td_sophus/sophus_tools.cpp
-        td_sophus/sophus_tools.h
+# thread safe structure
+file(GLOB thread_safe_lib threadSafeStructure/*.cpp threadSafeStructure/*.h threadSafeStructure/*.hpp)
+file(GLOB thread_safe_include threadSafeStructure/*.h threadSafeStructure/*.hpp)
+# realsense lib
+file(GLOB realsense_lib realsense/*.cpp realsense/*.h realsense/*.hpp)
+file(GLOB realsense_include realsense/*.h realsense/*.hpp)
+# File opertion
+file(GLOB file_operation_lib FileOperation/*.cpp FileOperation/*.h FileOperation/*.hpp)
+file(GLOB file_operation_include FileOperation/*.h FileOperation/*.hpp)
 
+# sophus_lib
+file(GLOB sophus_lib td_sophus/*.cpp td_sophus/*.h td_sophus/*.hpp)
+file(GLOB sophus_include td_sophus/*.h td_sophus/*.hpp)
+
+# pcl_lib
+file(GLOB pcl_lib PCL/*.cpp PCL/*.h PCL/*.hpp)
+file(GLOB pcl_include PCL/*.h PCL/*.hpp)
+# GALGO-2.0
+file(GLOB GALGO_lib GALGO-2.0/src/*.cpp GALGO-2.0/src/*.h GALGO-2.0/src/*.hpp)
+file(GLOB GALGO_include GALGO-2.0/src/*.h GALGO-2.0/src/*.hpp)
+# tool
+file(GLOB tool_lib tool/*.cpp tool/*.h tool/*.hpp)
+file(GLOB tool_include tool/*.h tool/*.hpp)
+# matplotlib c++
+file(GLOB matplotlib_lib matplotlib-cpp/*.cpp matplotlib-cpp/*.h matplotlib-cpp/*.hpp)
+file(GLOB matplotlib_include matplotlib-cpp/*.h matplotlib-cpp/*.hpp)
+# openGA
+file(GLOB openGA_lib openGA/src/*.cpp openGA/src/*.h openGA/src/*.hpp)
+file(GLOB openGA_include openGA/src/*.h openGA/src/*.hpp)
+# slam_tool
+file(GLOB slam_lib slam_tool/*/*.cpp slam_tool/*/*.h slam_tool/*/*.hpp slam_tool/*.cpp slam_tool/*.hpp slam_tool/*.h)
+file(GLOB slam_include slam_tool/*/*.h slam_tool/*/*.hpp slam_tool/*.h slam_tool/*.hpp)
+# algorithm_data_structure
+file(GLOB algorithm_data_structure_lib algorithm_data_structure/*.cpp algorithm_data_structure/*.hpp algorithm_data_structure/*.h)
+file(GLOB algorithm_data_structure_include algorithm_data_structure/*.h algorithm_data_structure/*.hpp)
+# eigen_lib
+file(GLOB eigen_lib td_eigen/*.cpp td_eigen/*.hpp td_eigen/*.h)
+file(GLOB eigen_include td_eigen/*.h td_eigen/*.hpp)
+
+add_library(TdLib SHARED
+#        threadSafeStructure/threadSafeStructure.cpp
+#        threadSafeStructure/threadSafeStructure.h
+        ${thread_safe_lib}
+#        realsense/realsense.cpp
+#        realsense/realsense.h
+        ${realsense_lib}
+#        FileOperation/FileOperation.cpp
+#        FileOperation/FileOperation.h
+#        FileOperation/keyboard.cpp
+#        FileOperation/keyboard.h
+        ${file_operation_lib}
+#        PCL/filter.cpp
+#        PCL/filter.h
+#        PCL/filter.hpp
+#        PCL/enveloping.cpp
+#        PCL/enveloping.h
+#        PCL/enveloping.hpp
+#        PCL/tools.cpp
+#        PCL/tools.h
+#        PCL/common_typedef.h
+#        PCL/keypoint.cpp
+#        PCL/keypoint.h
+#        PCL/global_feeature.cpp
+#        PCL/global_feature.h
+#        PCL/local_features.cpp
+#        PCL/local_features.h
+#        PCL/Viewer.cpp
+#        PCL/Viewer.h
+#        PCL/icp_related.cpp
+#        PCL/icp_related.h
+        ${pcl_lib}
+#        GALGO-2.0/src/Chromosome.hpp
+#        GALGO-2.0/src/Converter.hpp
+#        GALGO-2.0/src/Evolution.hpp
+#        GALGO-2.0/src/example.cpp
+#        GALGO-2.0/src/Galgo.hpp
+#        GALGO-2.0/src/GeneticAlgorithm.hpp
+#        GALGO-2.0/src/Parameter.hpp
+#        GALGO-2.0/src/Population.hpp
+#        GALGO-2.0/src/Randomize.hpp
+        ${GALGO_lib}
+#        tool/random_tool.hpp
+#        matplotlib-cpp/matplotlibcpp.h
+        ${matplotlib_lib}
+#        openGA/src/openga.hpp
+
+#        tool/random_tool.cpp tool/random_tool.h
+#        tool/tic_toc.h
+        ${tool_lib}
+#        slam_tool/slam_tool.cpp slam_tool/slam_tool.h slam_tool/slam_typedef.h
+#        slam_tool/2d_slam/2d_slam_tool.cpp slam_tool/2d_slam/2d_slam_tool.h
+#        slam_tool/draw_tool.cpp slam_tool/draw_tool.h
+#        slam_tool/backend/loss_function.cc slam_tool/backend/loss_function.h
+#        slam_tool/motion_transformation.cpp slam_tool/motion_transformation.h
+        ${slam_lib}
+#        algorithm_data_structure/sort.cpp algorithm_data_structure/sort.h
+        ${algorithm_data_structure_lib}
+#        td_eigen/eigen_common_typedef.h
+#        td_eigen/AXeqB.cpp
+#        td_eigen/AXeqB.h
+#        td_eigen/eigen_tools.cpp
+#        td_eigen/eigen_tools.hpp
+        ${eigen_lib}
+#        td_sophus/sophus_typedef.h
+#        td_sophus/sophus_tools.cpp
+#        td_sophus/sophus_tools.h
+        ${sophus_lib}
         )
 set(OpenCV_DIR "/usr/local/share/OpenCV")
 # OpenCV
@@ -109,47 +159,59 @@ include_directories(/home/wang/slam/thirdparty/Sophus/install/include)
 
 
 set(HEADER_FILES
-        FileOperation/FileOperation.h
-        realsense/realsense.h
-        threadSafeStructure/threadSafeStructure.h
-        FileOperation/keyboard.h
-        PCL/filter.h
-        PCL/filter.hpp
-        PCL/enveloping.h
-        PCL/enveloping.hpp
-        PCL/tools.h
-        PCL/common_typedef.h
-        PCL/keypoint.h
-        PCL/global_feature.h
-        PCL/local_features.h
-        PCL/Viewer.h
-        PCL/icp_related.h
-        GALGO-2.0/src/Chromosome.hpp
-        GALGO-2.0/src/Converter.hpp
-        GALGO-2.0/src/Evolution.hpp
-        GALGO-2.0/src/Galgo.hpp
-        GALGO-2.0/src/GeneticAlgorithm.hpp
-        GALGO-2.0/src/Parameter.hpp
-        GALGO-2.0/src/Population.hpp
-        GALGO-2.0/src/Randomize.hpp
-        tool/random_tool.hpp
-        matplotlib-cpp/matplotlibcpp.h
-        openGA/src/openga.hpp
-        tool/random_tool.h
-        tool/tic_toc.h
-        slam_tool/slam_tool.h
-        slam_tool/slam_typedef.h
+#        FileOperation/FileOperation.h
+#        realsense/realsense.h
+        ${realsense_include}
+        ${thread_safe_include}
+#        threadSafeStructure/threadSafeStructure.h
+#        FileOperation/keyboard.h
+        ${file_operation_include}
+#        PCL/filter.h
+#        PCL/filter.hpp
+#        PCL/enveloping.h
+#        PCL/enveloping.hpp
+#        PCL/tools.h
+#        PCL/common_typedef.h
+#        PCL/keypoint.h
+#        PCL/global_feature.h
+#        PCL/local_features.h
+#        PCL/Viewer.h
+#        PCL/icp_related.h
+        ${pcl_include}
+#        GALGO-2.0/src/Chromosome.hpp
+#        GALGO-2.0/src/Converter.hpp
+#        GALGO-2.0/src/Evolution.hpp
+#        GALGO-2.0/src/Galgo.hpp
+#        GALGO-2.0/src/GeneticAlgorithm.hpp
+#        GALGO-2.0/src/Parameter.hpp
+#        GALGO-2.0/src/Population.hpp
+#        GALGO-2.0/src/Randomize.hpp
+        ${GALGO_include}
+#        tool/random_tool.hpp
+#        matplotlib-cpp/matplotlibcpp.h
+        ${matplotlib_include}
+#        openGA/src/openga.hpp
+        ${openGA_include}
+#        tool/random_tool.h
+#        tool/tic_toc.h
+        ${tool_include}
+#        slam_tool/slam_tool.h
+#        slam_tool/slam_typedef.h
 #        slam_tool/draw_tool.h
-        slam_tool/backend/loss_function.h
-        algorithm_data_structure/sort.h
-        slam_tool/motion_transformation.h
-        slam_tool/2d_slam/2d_slam_tool.h
-        td_eigen/eigen_common_typedef.h
-        td_eigen/AXeqB.h
-        td_eigen/eigen_tools.h
-        td_eigen/eigen_tools.hpp
-        td_sophus/sophus_typedef.h
-        td_sophus/sophus_tools.h
+#        slam_tool/backend/loss_function.h
+        ${slam_include}
+#        algorithm_data_structure/sort.h
+        ${algorithm_data_structure_include}
+#        slam_tool/motion_transformation.h
+#        slam_tool/2d_slam/2d_slam_tool.h
+#        td_eigen/eigen_common_typedef.h
+#        td_eigen/AXeqB.h
+#        td_eigen/eigen_tools.h
+#        td_eigen/eigen_tools.hpp
+        ${eigen_include}
+#        td_sophus/sophus_typedef.h
+#        td_sophus/sophus_tools.h
+        ${sophus_include}
         )
 set_target_properties(TdLib PROPERTIES
         PUBLIC_HEADER

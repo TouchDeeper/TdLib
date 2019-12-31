@@ -3,7 +3,7 @@
 //
 #include <iostream>
 #include <pangolin/pangolin.h>
-#include "slam_typedef.h"
+#include "src/slam_tool/slam_typedef.h"
 #include "draw_tool.h"
 namespace td{
     /**

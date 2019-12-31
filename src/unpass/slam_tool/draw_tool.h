@@ -5,7 +5,7 @@
 #ifndef TDLIB_DRAW_TOOL_H
 #define TDLIB_DRAW_TOOL_H
 
-#include "slam_typedef.h"
+#include "src/slam_tool/slam_typedef.h"
 namespace td{
     /**
      * draw trajectory in pangolin
