@@ -35,6 +35,7 @@ message(STATUS "INSTALL_BIN_DIR :=" ${INSTALL_BIN_DIR})
 message(STATUS "INSTALL_INCLUDE_DIR :=" ${INSTALL_INCLUDE_DIR})
 message(STATUS "INSTALL_CMAKE_DIR :=" ${INSTALL_CMAKE_DIR})
 # set up include-directories
+
 include_directories(
         "${PROJECT_SOURCE_DIR}"   # to find foo/foo.h
         "${PROJECT_BINARY_DIR}")  # to find foo/config.h

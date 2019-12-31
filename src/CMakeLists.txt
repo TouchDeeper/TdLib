@@ -41,15 +41,15 @@ file(GLOB eigen_include td_eigen/*.h td_eigen/*.hpp)
 add_library(TdLib SHARED
 #        threadSafeStructure/threadSafeStructure.cpp
 #        threadSafeStructure/threadSafeStructure.h
-        ${thread_safe_lib}
+#        ${thread_safe_lib}
 #        realsense/realsense.cpp
 #        realsense/realsense.h
-        ${realsense_lib}
+#        ${realsense_lib}
 #        FileOperation/FileOperation.cpp
 #        FileOperation/FileOperation.h
 #        FileOperation/keyboard.cpp
 #        FileOperation/keyboard.h
-        ${file_operation_lib}
+#        ${file_operation_lib}
 #        PCL/filter.cpp
 #        PCL/filter.h
 #        PCL/filter.hpp
@@ -69,7 +69,7 @@ add_library(TdLib SHARED
 #        PCL/Viewer.h
 #        PCL/icp_related.cpp
 #        PCL/icp_related.h
-        ${pcl_lib}
+#        ${pcl_lib}
 #        GALGO-2.0/src/Chromosome.hpp
 #        GALGO-2.0/src/Converter.hpp
 #        GALGO-2.0/src/Evolution.hpp
@@ -79,29 +79,29 @@ add_library(TdLib SHARED
 #        GALGO-2.0/src/Parameter.hpp
 #        GALGO-2.0/src/Population.hpp
 #        GALGO-2.0/src/Randomize.hpp
-        ${GALGO_lib}
+#        ${GALGO_lib}
 #        tool/random_tool.hpp
 #        matplotlib-cpp/matplotlibcpp.h
-        ${matplotlib_lib}
+#        ${matplotlib_lib}
 #        openGA/src/openga.hpp
 
 #        tool/random_tool.cpp tool/random_tool.h
 #        tool/tic_toc.h
-        ${tool_lib}
+#        ${tool_lib}
 #        slam_tool/slam_tool.cpp slam_tool/slam_tool.h slam_tool/slam_typedef.h
 #        slam_tool/2d_slam/2d_slam_tool.cpp slam_tool/2d_slam/2d_slam_tool.h
 #        slam_tool/draw_tool.cpp slam_tool/draw_tool.h
 #        slam_tool/backend/loss_function.cc slam_tool/backend/loss_function.h
 #        slam_tool/motion_transformation.cpp slam_tool/motion_transformation.h
-        ${slam_lib}
+#        ${slam_lib}
 #        algorithm_data_structure/sort.cpp algorithm_data_structure/sort.h
-        ${algorithm_data_structure_lib}
+#        ${algorithm_data_structure_lib}
 #        td_eigen/eigen_common_typedef.h
 #        td_eigen/AXeqB.cpp
 #        td_eigen/AXeqB.h
 #        td_eigen/eigen_tools.cpp
 #        td_eigen/eigen_tools.hpp
-        ${eigen_lib}
+#        ${eigen_lib}
 #        td_sophus/sophus_typedef.h
 #        td_sophus/sophus_tools.cpp
 #        td_sophus/sophus_tools.h
@@ -113,9 +113,9 @@ find_package(OpenCV REQUIRED)
 include_directories(${OPENCV_INCLUDE_DIRS})
 link_directories(${OpenCV_LIBRARY_DIRS})
 if(OpenCV_FOUND)
-    MESSAGE(STATUS "OPENCV_INCLUDE_DIRS = " ${OPENCV_INCLUDE_DIRS})
-    MESSAGE(STATUS "OpenCV_LIBRARY_DIRS = " ${OpenCV_LIBRARY_DIRS})
-    MESSAGE(STATUS "OpenCV_LIBRARIES = " ${OpenCV_LIBRARIES})
+    MESSAGE(STATUS "OPENCV_INCLUDE_DIRS =  ${OPENCV_INCLUDE_DIRS}")
+    MESSAGE(STATUS "OpenCV_LIBRARY_DIRS =  ${OpenCV_LIBRARY_DIRS}")
+    MESSAGE(STATUS "OpenCV_LIBRARIES =  ${OpenCV_LIBRARIES}")
 endif()
 
 # Eigen
@@ -213,10 +213,10 @@ set(HEADER_FILES
 #        td_sophus/sophus_tools.h
         ${sophus_include}
         )
-set_target_properties(TdLib PROPERTIES
-        PUBLIC_HEADER
-        "${HEADER_FILES}"
-        )
+#set_target_properties(TdLib PROPERTIES
+#        PUBLIC_HEADER
+#        "${HEADER_FILES}"
+#        )                # install target will automatic install the PUBLIC_HEADER in ${INSTALL_INCLUDE_DIR}
 
 target_link_libraries(TdLib PRIVATE
                     ${DEPENDENCIES}
@@ -238,8 +238,17 @@ install(TARGETS TdLib
         EXPORT ${PROJECT_NAME}Targets
         RUNTIME DESTINATION "${INSTALL_BIN_DIR}" COMPONENT bin
         LIBRARY DESTINATION "${INSTALL_LIB_DIR}" COMPONENT shlib
-        PUBLIC_HEADER DESTINATION "${INSTALL_INCLUDE_DIR}/TdLibrary"
-        COMPONENT dev)
+#        PUBLIC_HEADER DESTINATION "${INSTALL_INCLUDE_DIR}/TdLibrary" COMPONENT dev
+        )
+set(CMAKE_SOURCE_DIR_BACKUP "${CMAKE_SOURCE_DIR}")
+MESSAGE("CMAKE_CURRENT_SOURCE_DIR = " "${CMAKE_CURRENT_SOURCE_DIR}")
+MESSAGE("CMAKE_SOURCE_DIR = " "${CMAKE_SOURCE_DIR}")
+set(CMAKE_SOURCE_DIR "${CMAKE_SOURCE_DIR}/src")
+MESSAGE("CMAKE_SOURCE_DIR = " "${CMAKE_SOURCE_DIR}")
+install(DIRECTORY  "${CMAKE_CURRENT_SOURCE_DIR}/" DESTINATION "${INSTALL_INCLUDE_DIR}/TdLibrary"
+        FILES_MATCHING PATTERN "*.h" PATTERN "*.hpp"
+        )
+set(CMAKE_SOURCE_DIR  "${CMAKE_SOURCE_DIR_BACKUP}")
 # uninstall target
 if(NOT TARGET uninstall)
     configure_file(
