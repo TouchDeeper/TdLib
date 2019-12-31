@@ -52,8 +52,11 @@ target_link_libraries(LibTest ${TdLib_LIBRARIES}
 add_executable(sophus_test sophus_test.cpp)
 target_link_libraries(sophus_test ${TdLib_LIBRARIES}
         ${Sophus_LIBRARIES})
-
+add_executable(sophus_average sophus_average.cpp)
+target_link_libraries(sophus_average ${TdLib_LIBRARIES}
+        ${Sophus_LIBRARIES})
 add_executable(dynamic_iter dynamic_iter.cpp)
+add_executable(unsigned_char unsigned_char.cpp)
 
 #target_link_libraries(ga_example ${TdLib_LIBRARIES}
 #        )

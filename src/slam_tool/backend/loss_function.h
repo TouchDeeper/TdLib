@@ -5,7 +5,7 @@
 #ifndef MYSLAM_LOSS_FUNCTION_H
 #define MYSLAM_LOSS_FUNCTION_H
 
-#include "eigen_types.h"
+#include "../../td_eigen/eigen_common_typedef.h"
 
 namespace td {
     namespace slam{
