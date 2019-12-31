@@ -41,15 +41,15 @@ file(GLOB eigen_include td_eigen/*.h td_eigen/*.hpp)
 add_library(TdLib SHARED
 #        threadSafeStructure/threadSafeStructure.cpp
 #        threadSafeStructure/threadSafeStructure.h
-#        ${thread_safe_lib}
+        ${thread_safe_lib}
 #        realsense/realsense.cpp
 #        realsense/realsense.h
-#        ${realsense_lib}
+        ${realsense_lib}
 #        FileOperation/FileOperation.cpp
 #        FileOperation/FileOperation.h
 #        FileOperation/keyboard.cpp
 #        FileOperation/keyboard.h
-#        ${file_operation_lib}
+        ${file_operation_lib}
 #        PCL/filter.cpp
 #        PCL/filter.h
 #        PCL/filter.hpp
@@ -69,7 +69,7 @@ add_library(TdLib SHARED
 #        PCL/Viewer.h
 #        PCL/icp_related.cpp
 #        PCL/icp_related.h
-#        ${pcl_lib}
+        ${pcl_lib}
 #        GALGO-2.0/src/Chromosome.hpp
 #        GALGO-2.0/src/Converter.hpp
 #        GALGO-2.0/src/Evolution.hpp
@@ -79,29 +79,29 @@ add_library(TdLib SHARED
 #        GALGO-2.0/src/Parameter.hpp
 #        GALGO-2.0/src/Population.hpp
 #        GALGO-2.0/src/Randomize.hpp
-#        ${GALGO_lib}
+        ${GALGO_lib}
 #        tool/random_tool.hpp
 #        matplotlib-cpp/matplotlibcpp.h
-#        ${matplotlib_lib}
+        ${matplotlib_lib}
 #        openGA/src/openga.hpp
 
 #        tool/random_tool.cpp tool/random_tool.h
 #        tool/tic_toc.h
-#        ${tool_lib}
+        ${tool_lib}
 #        slam_tool/slam_tool.cpp slam_tool/slam_tool.h slam_tool/slam_typedef.h
 #        slam_tool/2d_slam/2d_slam_tool.cpp slam_tool/2d_slam/2d_slam_tool.h
 #        slam_tool/draw_tool.cpp slam_tool/draw_tool.h
 #        slam_tool/backend/loss_function.cc slam_tool/backend/loss_function.h
 #        slam_tool/motion_transformation.cpp slam_tool/motion_transformation.h
-#        ${slam_lib}
+        ${slam_lib}
 #        algorithm_data_structure/sort.cpp algorithm_data_structure/sort.h
-#        ${algorithm_data_structure_lib}
+        ${algorithm_data_structure_lib}
 #        td_eigen/eigen_common_typedef.h
 #        td_eigen/AXeqB.cpp
 #        td_eigen/AXeqB.h
 #        td_eigen/eigen_tools.cpp
 #        td_eigen/eigen_tools.hpp
-#        ${eigen_lib}
+        ${eigen_lib}
 #        td_sophus/sophus_typedef.h
 #        td_sophus/sophus_tools.cpp
 #        td_sophus/sophus_tools.h
