@@ -1,15 +1,17 @@
 //
 // Created by wang on 19-11-5.
 //
-#include <sophus/se3.h>
+#include <Eigen/Core>
+#include <Eigen/Geometry>
+#include <sophus/se3.hpp>
 #include <iostream>
-#include <TdLibrary/motion_transformation.h>
+#include <TdLibrary/slam_tool/motion_transformation.h>
 class CandidateFromTraining {
 
 public:
     CandidateFromTraining(){
         stop_subscribe_pose_ = false;
-        cl_T_ = Sophus::SE3(Eigen::Matrix3d::Identity(),Eigen::Vector3d(0,0,0));
+        cl_T_ = Sophus::SE3d(Eigen::Matrix3d::Identity(),Eigen::Vector3d(0,0,0));
         cl_T_c_ = cl_T_;
         std::cout<<"cl_T_ = \n"<<cl_T_.matrix()<<std::endl;
         std::cout<<"cl_T_c_ = \n"<<cl_T_c_.matrix()<<std::endl;
@@ -20,11 +22,11 @@ public:
 //        Eigen::Vector3d translate(0,0,0);
         cl_T_ = td::FixedPreTranslateThenEulertoSE3(fixed_euler_angle, Eigen::Vector3d(0,0,0));
         std::cout<<"cl_T_ = \n"<<cl_T_.matrix()<<std::endl;
-//        Sophus::SE3 temp(fixed_euler_angle,translate);
+//        Sophus::SE3d temp(fixed_euler_angle,translate);
         cl_T_c_ = cl_T_;
         std::cout<<"cl_T_c_ = \n"<<cl_T_c_.matrix()<<std::endl;
         Eigen::Matrix3d b_R_banana = Eigen::AngleAxisd(-M_PI_2, Eigen::Vector3d::UnitX()).matrix();
-        b_T_banana_ = Sophus::SE3(b_R_banana,Eigen::Vector3d(0,0,0));
+        b_T_banana_ = Sophus::SE3d(b_R_banana,Eigen::Vector3d(0,0,0));
     }
     void SimGetc_T_banana() {
 //        ros::NodeHandle n;
@@ -46,7 +48,7 @@ public:
 
         c_T_banana_ = cl_T_c_.inverse() * c_T_banana_;
 //        Eigen::Matrix3d b_R_banana = Eigen::AngleAxisd(-M_PI_2, Eigen::Vector3d::UnitX()).matrix();
-//        b_T_banana_ = Sophus::SE3(b_R_banana,Eigen::Vector3d(0,0,0));
+//        b_T_banana_ = Sophus::SE3d(b_R_banana,Eigen::Vector3d(0,0,0));
         std::cout<<"b_T_banana_ = \n"<<b_T_banana_.matrix()<<std::endl;
         c_T_banana_ = c_T_banana_ * b_T_banana_;
         std::cout<<"c_T_banana_ = \n"<<c_T_banana_.matrix()<<std::endl;
@@ -59,12 +61,12 @@ private:
 
 private:
     bool stop_subscribe_pose_;
-    Sophus::SE3 c_T_bowl_;
-    Sophus::SE3 c_T_banana_;
-    Sophus::SE3 w_T_bowl_;
-    Sophus::SE3 cl_T_;//cl_T_c = cl_T_ * I
-    Sophus::SE3 cl_T_c_;//cl_T_c = cl_T_ * I
-    Sophus::SE3 b_T_banana_;//The coordinate system of the banana in gazebo is transformed by rotating the raw coordinate -pi/2 alone x
+    Sophus::SE3d c_T_bowl_;
+    Sophus::SE3d c_T_banana_;
+    Sophus::SE3d w_T_bowl_;
+    Sophus::SE3d cl_T_;//cl_T_c = cl_T_ * I
+    Sophus::SE3d cl_T_c_;//cl_T_c = cl_T_ * I
+    Sophus::SE3d b_T_banana_;//The coordinate system of the banana in gazebo is transformed by rotating the raw coordinate -pi/2 alone x
 };
 
 int main(){

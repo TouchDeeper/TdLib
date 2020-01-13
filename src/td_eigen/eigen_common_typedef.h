@@ -5,19 +5,15 @@
 #ifndef TDLIB_EIGEN_COMMON_TYPEDEF_H
 #define TDLIB_EIGEN_COMMON_TYPEDEF_H
 
+//#include <Eigen/StdVector>
 #include <vector>
 #include <Eigen/Core>
 #include <map>
 namespace td{
-    typedef Eigen::Matrix<double,6,1> Vector6d;
 
-    typedef std::vector<Eigen::Matrix4d, Eigen::aligned_allocator<Eigen::Matrix4d> > VectorMatrix4d;
-    typedef std::vector<Eigen::Matrix4f, Eigen::aligned_allocator<Eigen::Matrix4f> > VectorMatrix4f;
-    typedef std::vector<Eigen::Vector3d, Eigen::aligned_allocator<Eigen::Vector3d> > VectorVector3d;
-    typedef std::vector<Eigen::Vector2d, Eigen::aligned_allocator<Eigen::Vector2d> > VectorVector2d;
-    typedef std::vector<Vector6d, Eigen::aligned_allocator<Vector6d> > VectorVector6d;
-    typedef std::vector<Eigen::Matrix3d, Eigen::aligned_allocator<Eigen::Matrix3d> > VectorMatrix3d;
-    typedef std::vector<std::pair<Eigen::Matrix4d, double>, Eigen::aligned_allocator<std::pair<Eigen::Matrix4d, double>> > VectorPairMatrix4dDouble;
+    typedef std::vector<Eigen::Matrix4d, Eigen::aligned_allocator<Eigen::Matrix4d> > VecMat4;
+    typedef std::vector<Eigen::Matrix4f, Eigen::aligned_allocator<Eigen::Matrix4f> > VecMat4f;
+    typedef std::vector<Eigen::Matrix3d, Eigen::aligned_allocator<Eigen::Matrix3d> > VecMat3;
 
     // double matricies
     typedef Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> MatXX;
@@ -87,6 +83,7 @@ namespace td{
     typedef Eigen::Matrix<double, 4, 1> Vec4;
     typedef Eigen::Matrix<double, 3, 1> Vec3;
     typedef Eigen::Matrix<double, 2, 1> Vec2;
+    typedef Eigen::Matrix<int, 2, 1> Vec2i;
     typedef Eigen::Matrix<double, 1, 1> Vec1;
     typedef Eigen::Matrix<double, Eigen::Dynamic, 1> VecX;
 
@@ -107,10 +104,11 @@ namespace td{
 
 // Vector of Eigen vectors
     typedef std::vector<Vec2, Eigen::aligned_allocator<Vec2>> VecVec2;
+    typedef std::vector<Vec2i, Eigen::aligned_allocator<Vec2i>> VecVec2i;
     typedef std::vector<Vec3, Eigen::aligned_allocator<Vec3>> VecVec3;
     typedef std::vector<Vec2f, Eigen::aligned_allocator<Vec2f>> VecVec2f;
     typedef std::vector<Vec3f, Eigen::aligned_allocator<Vec3f>> VecVec3f;
-
+    typedef std::vector<Vec6, Eigen::aligned_allocator<Vec6> > VecVec6;
 // Map of Eigen matrix
     typedef std::map<unsigned long, MatXX, std::less<unsigned long>, Eigen::aligned_allocator<MatXX>> MapMatXX;
 

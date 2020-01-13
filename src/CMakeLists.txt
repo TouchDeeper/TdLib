@@ -84,7 +84,7 @@ add_library(TdLib SHARED
 #        matplotlib-cpp/matplotlibcpp.h
         ${matplotlib_lib}
 #        openGA/src/openga.hpp
-
+        ${openGA_lib}
 #        tool/random_tool.cpp tool/random_tool.h
 #        tool/tic_toc.h
         ${tool_lib}
@@ -107,6 +107,12 @@ add_library(TdLib SHARED
 #        td_sophus/sophus_tools.h
         ${sophus_lib}
         )
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
+if(Threads_FOUND)
+    MESSAGE(STATUS "Threads_LIBRARIES =  ${Threads_LIBRARIES}")
+endif()
+
 set(OpenCV_DIR "/usr/local/share/OpenCV")
 # OpenCV
 find_package(OpenCV REQUIRED)
@@ -151,13 +157,13 @@ find_package(Boost COMPONENTS system filesystem thread chrono REQUIRED)
 #include_directories(${Pangolin_INCLUDE_DIRS} )
 
 #no template sophus
-find_package(Sophus REQUIRED)
-include_directories(${Sophus_INCLUDE_DIRS})
+#find_package(Sophus REQUIRED)
+#include_directories(${Sophus_INCLUDE_DIRS})
 
 #template sophus
 include_directories(/home/wang/slam/thirdparty/Sophus/install/include)
 
-
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 set(HEADER_FILES
 #        FileOperation/FileOperation.h
 #        realsense/realsense.h
@@ -222,9 +228,10 @@ target_link_libraries(TdLib PRIVATE
                     ${DEPENDENCIES}
                     ${OpenCV_LIBRARIES}
                     ${PCL_LIBRARIES}
+                    ${Boost_LIBRARIES}
 #                    ${Pangolin_LIBRARIES}
-                    ${Sophus_LIBRARIES}
-#                    Threads::Threads
+#                    ${Sophus_LIBRARIES}
+                    Threads::Threads
                     )
 #set(INSTALL_LIB_DIR "${PROJECT_BINARY_DIR}/lib") # 假设安装目录在编译目录的lib子目录内
 

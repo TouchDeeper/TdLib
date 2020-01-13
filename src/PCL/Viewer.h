@@ -20,7 +20,7 @@ namespace td{
         public:
             pcl::visualization::PCLVisualizer viewer_ ;
         public:
-            void ShowCorrespondence(const std::pair<std::vector<std::vector<int>>,float>* correspondence, const PointNCloudPtr model_view, const PointNCloudPtr scene_view,
+            void ShowCorrespondence(const std::vector<std::vector<int>>& correspondence, const PointNCloudPtr model_view, const PointNCloudPtr scene_view,
             const Eigen::Matrix4d transformations,ColorHandlerPointN target_view_color, ColorHandlerPointN source_view_color, std::vector<int> line_rgb,
             double point_size = 1,std::vector<int> background_rgb = std::vector<int>(3,0));
             void ClearView(){

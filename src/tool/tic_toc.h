@@ -3,6 +3,7 @@
 #include <ctime>
 #include <cstdlib>
 #include <chrono>
+#include <unistd.h>
 namespace td{
     class TicToc
     {
@@ -29,6 +30,8 @@ namespace td{
             std::chrono::duration<double> elapsed_seconds = end - start;
             return elapsed_seconds.count();
         }
+        virtual void delay_s(int second);
+        virtual void delay_s(float second);
     private:
         std::chrono::time_point<std::chrono::system_clock> start, end;
     };

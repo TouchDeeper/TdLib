@@ -5,7 +5,7 @@
 #include "Viewer.h"
 namespace td{
     namespace pclib{
-        void Viewer::ShowCorrespondence(const std::pair<std::vector<std::vector<int>>,float>* correspondence, const PointNCloudPtr source_view, const PointNCloudPtr target_view,
+        void Viewer::ShowCorrespondence(const std::vector<std::vector<int>>& correspondence, const PointNCloudPtr source_view, const PointNCloudPtr target_view,
         const Eigen::Matrix4d transformations,ColorHandlerPointN target_view_color, ColorHandlerPointN source_view_color,std::vector<int> line_rgb,double point_size,std::vector<int> background_rgb)
         {
 
@@ -59,19 +59,19 @@ namespace td{
             viewer_.addPointCloud<PointN>(model_view_transformed_translation,source_view_color,"model_view_translation",vp_2);
             viewer_.setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, point_size, "model_view_translation",vp_2);
 
-            for (int i = 0; i < (*correspondence).first[0].size(); ++i) {
+            for (int i = 0; i < correspondence[0].size(); ++i) {
                 std::stringstream ss_line;
                 ss_line << "correspondence_line" << i;
                 pcl::PointXYZ model_point;
-                model_point.x = (model_view_transformed_translation->at(correspondence->first[0][i])).x;
-                model_point.y = (model_view_transformed_translation->at(correspondence->first[0][i])).y;
-                model_point.z = (model_view_transformed_translation->at(correspondence->first[0][i])).z;
+                model_point.x = (model_view_transformed_translation->at(correspondence[0][i])).x;
+                model_point.y = (model_view_transformed_translation->at(correspondence[0][i])).y;
+                model_point.z = (model_view_transformed_translation->at(correspondence[0][i])).z;
                 sampling_keypoints->push_back(model_point);
 
                 pcl::PointXYZ scene_point;
-                scene_point.x = (target_view->at(correspondence->first[1][i])).x;
-                scene_point.y = (target_view->at(correspondence->first[1][i])).y;
-                scene_point.z = (target_view->at(correspondence->first[1][i])).z;
+                scene_point.x = (target_view->at(correspondence[1][i])).x;
+                scene_point.y = (target_view->at(correspondence[1][i])).y;
+                scene_point.z = (target_view->at(correspondence[1][i])).z;
                 match_keypoints->push_back(scene_point);
 
                 //  We are drawing a line for each pair of clustered correspondences found between the model and the scene

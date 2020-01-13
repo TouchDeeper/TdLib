@@ -1,7 +1,7 @@
 //
 // Created by wang on 19-8-14.
 //
-#include <sophus/se3.h>
+#include <sophus/se3.hpp>
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -17,13 +17,13 @@ using namespace Eigen;
 
 using namespace std;
 typedef vector<Eigen::Vector3d, Eigen::aligned_allocator<Eigen::Vector3d>> VecVector3d;
-//void DrawTrajectory(vector<Sophus::SE3, Eigen::aligned_allocator<Sophus::SE3>>);
+//void DrawTrajectory(vector<Sophus::SE3d, Eigen::aligned_allocator<Sophus::SE3d>>);
 int main(){
     string compare_file = "../compare.txt";
     VecVector3d t_es,t_gs,q_es,q_gs;//原坐标与去质心坐标容器
 
-    vector<Sophus::SE3, Eigen::aligned_allocator<Sophus::SE3>> poses_Tgis;
-    vector<Sophus::SE3, Eigen::aligned_allocator<Sophus::SE3>> poses_Teis;
+    vector<Sophus::SE3d, Eigen::aligned_allocator<Sophus::SE3d>> poses_Tgis;
+    vector<Sophus::SE3d, Eigen::aligned_allocator<Sophus::SE3d>> poses_Teis;
     Eigen::Matrix<double,3,3> W;
     /// implement pose reading code
     // start your code here (5~10 lines)
@@ -45,9 +45,9 @@ int main(){
         Eigen::Vector3d t_g(data[9],data[10],data[11]);
         t_es.push_back(t_e);
         t_gs.push_back(t_g);
-        Sophus::SE3 Tgi(R_g,t_g);
+        Sophus::SE3d Tgi(R_g,t_g);
         poses_Tgis.push_back(Tgi);
-        Sophus::SE3 Tei(R_e,t_e);
+        Sophus::SE3d Tei(R_e,t_e);
         poses_Teis.push_back(Tei);
     }
     compare.close();
@@ -56,7 +56,7 @@ int main(){
     Eigen::Vector3d t;
     td::IcpTrajectoryAlign(t_es, t_gs, Reg, t);
     //通过R,t构造Teg
-    Sophus::SE3 Teg(Reg, t);
+    Sophus::SE3d Teg(Reg, t);
 
     //将poses_Teis转换到poses_Tgis的坐标系
     for(auto &t_:t_gs)
@@ -76,7 +76,7 @@ int main(){
     std::cout<<vec<<std::endl;
 }
 ///*******************************************************************************************/
-//void DrawTrajectory(vector<Sophus::SE3, Eigen::aligned_allocator<Sophus::SE3>> poses) {
+//void DrawTrajectory(vector<Sophus::SE3d, Eigen::aligned_allocator<Sophus::SE3d>> poses) {
 //    if (poses.empty()) {
 //        cerr << "Trajectory is empty!" << endl;
 //        return;

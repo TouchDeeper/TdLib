@@ -6,7 +6,7 @@
 #include "TdLibrary/eigen_tools.h"
 #include "TdLibrary/tic_toc.h"
 #include "TdLibrary/eigen_common_typedef.h"
-#include <TdLibrary/motion_transformation.h>
+#include <TdLibrary/slam_tool/motion_transformation.h>
 //#include <thread>
 //#include <atomic>
 //#include "opencv2/core.hpp"
@@ -15,8 +15,8 @@
 #include <Eigen/Core>
 #include <Eigen/Geometry>
 #include <eigen3/Eigen/Dense>
-#include <sophus/se3.h>
-#include <sophus/so3.h>
+#include <sophus/se3.hpp>
+#include <sophus/so3.hpp>
 
 using namespace std;
 int main() {
@@ -151,8 +151,8 @@ int main() {
     Eigen::Matrix3d R2 = m2.block(0,0,3,3);
     Eigen::Vector3d t1 = m1.col(3).segment(0,3);
     Eigen::Vector3d t2 = m2.col(3).segment(0,3);
-    Sophus::SE3 T1(R1, t1);
-    Sophus::SE3 T2(R2, t2);
+    Sophus::SE3d T1(R1, t1);
+    Sophus::SE3d T2(R2, t2);
     td::Vector6d se1 = T1.log();
     td::Vector6d se2 = T2.log();
     std::cout<<se2.transpose()<<std::endl;
@@ -188,7 +188,7 @@ int main() {
     R = T.block(0,0,3,3);
     Eigen::Vector3d t;
     t = T.col(3).segment(0,3);
-    Sophus::SE3 SE3_T(R,t);
+    Sophus::SE3d SE3_T(R,t);
     td::Vector6d se3_T = SE3_T.log();
     std::cout<<se3_T <<std::endl;
 

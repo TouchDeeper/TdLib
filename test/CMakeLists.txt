@@ -4,18 +4,23 @@ project(LibTest)
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 set(CMAKE_CXX_STANDARD 11)
+#add_definitions(-std=c++11)
 #TdLib
 set(TdLib_DIR "/home/wang/CLionProjects/TdLibrary/install/lib/CMake/TdLib/")
 find_package(TdLib REQUIRED)
 include_directories(${TdLib_INCLUDE_DIRS})
 MESSAGE(STATUS "TdLib_INCLUDE_DIRS = " ${TdLib_INCLUDE_DIRS})
 
-#PCL
+
+
+# PCL
 find_package(PCL 1.8 REQUIRED)
 include_directories(${PCL_INCLUDE_DIRS})
 link_directories(${PCL_LIBRARY_DIRS})
 # 添加Eigen头文件
-include_directories( "/usr/include/eigen3" )
+include_directories( "/usr/local/include/eigen3" )
+#template sophus
+include_directories(/home/wang/slam/thirdparty/Sophus/install/include)
 #
 ## OpenCV
 #find_package(OpenCV REQUIRED)
@@ -35,28 +40,25 @@ if(OPENMP_FOUND)
     set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
 endif()
 #sophus
-find_package(Sophus REQUIRED)
-include_directories(${Sophus_INCLUDE_DIRS})
+#find_package(Sophus REQUIRED)
+#include_directories(${Sophus_INCLUDE_DIRS})
 
 add_executable(LibTest main.cpp)
 
 #add_executable(ga_example ga_example.cpp)
 message(STATUS "TdLib_LIBRARIES = " ${TdLib_LIBRARIES})
-target_link_libraries(LibTest ${TdLib_LIBRARIES}
-        ${Sophus_LIBRARIES}
+#target_link_libraries(LibTest ${TdLib_LIBRARIES}
 #        Threads::Threads
 #        ${OpenCV_LIBRARIES}
 #        ${PCL_LIBRARIES}
-        )
+#        )
 
-add_executable(sophus_test sophus_test.cpp)
-target_link_libraries(sophus_test ${TdLib_LIBRARIES}
-        ${Sophus_LIBRARIES})
+#add_executable(sophus_test sophus_test.cpp)
+#target_link_libraries(sophus_test ${TdLib_LIBRARIES})
 add_executable(sophus_average sophus_average.cpp)
-target_link_libraries(sophus_average ${TdLib_LIBRARIES}
-        ${Sophus_LIBRARIES})
-add_executable(dynamic_iter dynamic_iter.cpp)
-add_executable(unsigned_char unsigned_char.cpp)
+target_link_libraries(sophus_average ${TdLib_LIBRARIES} ${PCL_LIBRARIES})
+#add_executable(dynamic_iter dynamic_iter.cpp)
+#add_executable(unsigned_char unsigned_char.cpp)
 
 #target_link_libraries(ga_example ${TdLib_LIBRARIES}
 #        )
