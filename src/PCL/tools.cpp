@@ -223,6 +223,7 @@ namespace td{
             viewer.spin();
             viewer.close();
         }
+
         /**
          * get infomation after the souce be registered to the target
          * @param input_source source cloud

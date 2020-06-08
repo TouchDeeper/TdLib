@@ -33,7 +33,7 @@ file(GLOB slam_lib slam_tool/*/*.cpp slam_tool/*/*.h slam_tool/*/*.hpp slam_tool
 file(GLOB slam_include slam_tool/*/*.h slam_tool/*/*.hpp slam_tool/*.h slam_tool/*.hpp)
 # algorithm_data_structure
 file(GLOB algorithm_data_structure_lib algorithm_data_structure/*.cpp algorithm_data_structure/*.hpp algorithm_data_structure/*.h)
-file(GLOB algorithm_data_structure_include algorithm_data_structure/*.h algorithm_data_structure/*.hpp)
+file(GLOB algorithm_data_structure_include algorithm_data_structure/*.h algorithm_data_structure/*.hpp slam_tool/utilities.hpp)
 # eigen_lib
 file(GLOB eigen_lib td_eigen/*.cpp td_eigen/*.hpp td_eigen/*.h)
 file(GLOB eigen_include td_eigen/*.h td_eigen/*.hpp)

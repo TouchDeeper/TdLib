@@ -112,6 +112,34 @@ namespace td{
                 }
             }
         }
+        /**
+            Smooths the point clouds. Sharp edges are smoothed mimicing the real behaviour of the SR300 depth sensor
+            @param cloud The point cloud
+        */
+        template <typename PointType>
+        void smoothCloud (typename pcl::PointCloud<PointType>::Ptr cloud, double search_raduis_mls_)
+        {
+            // Create a KD-Tree
+            typename pcl::search::KdTree<PointType>::Ptr tree (new pcl::search::KdTree<PointType>);
+
+            // Output has the PointNormal type in order to store the normals calculated by MLS
+            typename pcl::PointCloud<PointType>::Ptr mls_points (new pcl::PointCloud<PointType>());
+
+            // Init object (second point type is for the normals, even if unused)
+            pcl::MovingLeastSquares<PointType, PointType> mls;
+
+            mls.setComputeNormals (false);
+
+            // Set parameters
+            mls.setInputCloud (cloud);
+            mls.setPolynomialFit (true);
+            mls.setSearchMethod (tree);
+            mls.setSearchRadius (search_raduis_mls_);
+
+            // Reconstruct
+            mls.process (*mls_points);
+            copyPointCloud(*mls_points, *cloud);
+        }
     }//namespace pclib
 } //namespace td
 #endif //TDLIB_FILTER_H

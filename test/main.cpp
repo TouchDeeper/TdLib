@@ -2,10 +2,9 @@
 //#include "TdLibrary/realsense.h"
 //#include "TdLibrary/threadSafeStructure.h"
 //#include "TdLibrary/random_tool.hpp"
-#include "TdLibrary/loss_function.h"
-#include "TdLibrary/eigen_tools.h"
-#include "TdLibrary/tic_toc.h"
-#include "TdLibrary/eigen_common_typedef.h"
+#include "TdLibrary/td_eigen/eigen_tools.h"
+#include "TdLibrary/tool/tic_toc.h"
+#include "TdLibrary/td_eigen/eigen_common_typedef.h"
 #include <TdLibrary/slam_tool/motion_transformation.h>
 //#include <thread>
 //#include <atomic>
@@ -43,8 +42,6 @@ int main() {
 //            std::cout<<" main thread push value "<<i<<std::endl;
 //        }
 //    t2.join();
-    td::slam::backend::CauchyLoss robust_function(1);
-
     float x = 1.123456789;
     float y = 0.000123456789;
     std::cout<<x<<std::endl<<y<<std::endl;
@@ -137,60 +134,71 @@ int main() {
 //    td::readMatrix("../relative_matrix.txt", read_matrix);
 //    std::cout<<"read take "<<read_timer.toc()<<" ms"<<std::endl;
 //    std::cout<<read_matrix<<std::endl;
-    Eigen::Matrix4d m1;
-    Eigen::Matrix4d m2;
-    m1 << 0.990764, -0.0802061,   0.109333,  -0.113314,
-    -0.134136,   -0.69777,   0.703651,  -0.743171,
-    0.0198521,  -0.711817,  -0.702084,    1.03284,
-    0,          0,          0,          1;
-    m2 <<  0.975218, -0.120149,   0.18578, -0.209835,
-            -0.216719, -0.687764,   0.69283, -0.731893,
-            0.0445302, -0.715923, -0.696758,   1.02681,
-            0,         0,         0,         1;
-    Eigen::Matrix3d R1 = m1.block(0,0,3,3);
-    Eigen::Matrix3d R2 = m2.block(0,0,3,3);
-    Eigen::Vector3d t1 = m1.col(3).segment(0,3);
-    Eigen::Vector3d t2 = m2.col(3).segment(0,3);
-    Sophus::SE3d T1(R1, t1);
-    Sophus::SE3d T2(R2, t2);
-    td::Vector6d se1 = T1.log();
-    td::Vector6d se2 = T2.log();
-    std::cout<<se2.transpose()<<std::endl;
-    if(m2.isApprox(m1,0.073)){
-        std::cout<<"approx"<<std::endl;
-    } else
-        std::cout<<"no approx"<<std::endl;
-    if(se2.isApprox(se1, 0.053))
-        std::cout<<"approx"<<std::endl;
-    else
-        std::cout<<"no approx"<<std::endl;
+//    Eigen::Matrix4d m1;
+//    Eigen::Matrix4d m2;
+//    m1 << 0.990764, -0.0802061,   0.109333,  -0.113314,
+//    -0.134136,   -0.69777,   0.703651,  -0.743171,
+//    0.0198521,  -0.711817,  -0.702084,    1.03284,
+//    0,          0,          0,          1;
+//    m2 <<  0.975218, -0.120149,   0.18578, -0.209835,
+//            -0.216719, -0.687764,   0.69283, -0.731893,
+//            0.0445302, -0.715923, -0.696758,   1.02681,
+//            0,         0,         0,         1;
+//    Eigen::Matrix3d R1 = m1.block(0,0,3,3);
+//    Eigen::Matrix3d R2 = m2.block(0,0,3,3);
+//    Eigen::Vector3d t1 = m1.col(3).segment(0,3);
+//    Eigen::Vector3d t2 = m2.col(3).segment(0,3);
+//    Sophus::SE3d T1(R1, t1);
+//    Sophus::SE3d T2(R2, t2);
+//    td::Vec6 se1 = T1.log();
+//    td::Vec6 se2 = T2.log();
+//    std::cout<<se2.transpose()<<std::endl;
+//    if(m2.isApprox(m1,0.073)){
+//        std::cout<<"approx"<<std::endl;
+//    } else
+//        std::cout<<"no approx"<<std::endl;
+//    if(se2.isApprox(se1, 0.053))
+//        std::cout<<"approx"<<std::endl;
+//    else
+//        std::cout<<"no approx"<<std::endl;
 
-//    Eigen::Matrix3d R;
-//    R << 0.999566,  0.0245383, -0.0162906,
-//    -0.024185,   0.999475,   0.021544,
-//    0.0168107, -0.0211407,   0.999635;
-//    Eigen::Vector3d euler = td::RotationToEulerAngle(R);
-//    Eigen::Vector3d euler_eigen = R.eulerAngles(2,1,0);
-//    std::cout<<"euler angle in eigen = "<<euler_eigen.transpose()<<std::endl;
-//    std::cout<<"xt_z = "<<euler(0)<<std::endl;
-//    std::cout<<"xt_y = "<<euler(1)<<std::endl;
-//    std::cout<<"xt_x = "<<euler(2)<<std::endl;
+    Eigen::Matrix3d R;
+    R << 0.999566,  0.0245383, -0.0162906,
+    -0.024185,   0.999475,   0.021544,
+    0.0168107, -0.0211407,   0.999635;
+    Eigen::Vector3d euler_1(2, 3, 3.13);
+    Eigen::Vector3d euler_2(2, 3, -3.13);
+    Eigen::Matrix3d R_1 = td::EulerToRotation(euler_1);
+    Eigen::Matrix3d R_2 = td::EulerToRotation(euler_2);
+    Eigen::Matrix3d deltaR = R_1.transpose()*R_2;
+    std::cout<<"deltaR = \n"<<deltaR<<std::endl;
+    Eigen::Vector3d euler = td::RotationToEulerAngle(deltaR);
+    Eigen::Vector3d euler_eigen = deltaR.eulerAngles(2,1,0);
+    std::cout<<"euler angle in eigen = "<<euler_eigen.transpose()<<std::endl;
+    std::cout<<"xt_z = "<<euler(0)<<std::endl;
+    std::cout<<"xt_y = "<<euler(1)<<std::endl;
+    std::cout<<"xt_x = "<<euler(2)<<std::endl;
+
+//    euler(0) += 2 * M_PI;
+//    Eigen::Matrix3d R_;
+//    R_ = td::EulerToRotation(euler);
+//    std::cout<<"R_ = \n"<<R_<<std::endl;
 //
 //    Eigen::Matrix3d rotation = td::EulerToRotation(euler);
 //    std::cout<<"rotation = \n"<<rotation<<std::endl;
 
-    Eigen::Matrix4d T;
-    T << -0.995503,  -0.073469,  0.0598016, 0.00815071,
-        -0.0790468,   0.29634,  -0.951806,   0.341557,
-        0.0522066,  -0.952253, -0.300815,   0.147992,
-        0,          0,         0,           1;
-    Eigen::Matrix3d R;
-    R = T.block(0,0,3,3);
-    Eigen::Vector3d t;
-    t = T.col(3).segment(0,3);
-    Sophus::SE3d SE3_T(R,t);
-    td::Vector6d se3_T = SE3_T.log();
-    std::cout<<se3_T <<std::endl;
+//    Eigen::Matrix4d T;
+//    T << -0.995503,  -0.073469,  0.0598016, 0.00815071,
+//        -0.0790468,   0.29634,  -0.951806,   0.341557,
+//        0.0522066,  -0.952253, -0.300815,   0.147992,
+//        0,          0,         0,           1;
+//    Eigen::Matrix3d R;
+//    R = T.block(0,0,3,3);
+//    Eigen::Vector3d t;
+//    t = T.col(3).segment(0,3);
+//    Sophus::SE3d SE3_T(R,t);
+//    td::Vec6 se3_T = SE3_T.log();
+//    std::cout<<se3_T <<std::endl;
 
 
 }

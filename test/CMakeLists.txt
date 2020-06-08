@@ -47,11 +47,11 @@ add_executable(LibTest main.cpp)
 
 #add_executable(ga_example ga_example.cpp)
 message(STATUS "TdLib_LIBRARIES = " ${TdLib_LIBRARIES})
-#target_link_libraries(LibTest ${TdLib_LIBRARIES}
+target_link_libraries(LibTest ${TdLib_LIBRARIES}
 #        Threads::Threads
 #        ${OpenCV_LIBRARIES}
 #        ${PCL_LIBRARIES}
-#        )
+        )
 
 #add_executable(sophus_test sophus_test.cpp)
 #target_link_libraries(sophus_test ${TdLib_LIBRARIES})

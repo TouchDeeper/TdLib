@@ -38,6 +38,13 @@ namespace td{
          */
         void ShowAlignResult(const PointNCloudPtr source, const PointNCloudPtr target, const Eigen::Matrix4d t_T_s,std::string viewer_name,ColorHandlerPointN target_color, ColorHandlerPointN source_color,std::vector<int> window_size = std::vector<int>(2,0),double point_size=0.1,std::vector<int> background_color = std::vector<int>(3,0));
         void ShowBeforeAndAfterAlign(const PointNCloudPtr source, const PointNCloudPtr target, const Eigen::Matrix4d t_T_s_before, const Eigen::Matrix4d t_T_s_after,std::string viewer_name,ColorHandlerPointN target_color, ColorHandlerPointN source_color,std::vector<int> window_size = std::vector<int>(2,0),double point_size=0.1,std::vector<int> background_color = std::vector<int>(3,0));
+
+        /**
+         *
+         * @param cloud
+         * @param scale coordinate system scale
+         */
+        void quickShowCloud(const PointCloudPtr& cloud, double scale);
         /**
         * get infomation after the souce be registered to the target
         * @param input_source source cloud
