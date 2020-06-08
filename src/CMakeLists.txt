@@ -22,9 +22,6 @@ file(GLOB GALGO_include GALGO-2.0/src/*.h GALGO-2.0/src/*.hpp)
 # tool
 file(GLOB tool_lib tool/*.cpp tool/*.h tool/*.hpp)
 file(GLOB tool_include tool/*.h tool/*.hpp)
-# matplotlib c++
-file(GLOB matplotlib_lib matplotlib-cpp/*.cpp matplotlib-cpp/*.h matplotlib-cpp/*.hpp)
-file(GLOB matplotlib_include matplotlib-cpp/*.h matplotlib-cpp/*.hpp)
 # openGA
 file(GLOB openGA_lib openGA/src/*.cpp openGA/src/*.h openGA/src/*.hpp)
 file(GLOB openGA_include openGA/src/*.h openGA/src/*.hpp)
@@ -81,8 +78,6 @@ add_library(TdLib SHARED
 #        GALGO-2.0/src/Randomize.hpp
         ${GALGO_lib}
 #        tool/random_tool.hpp
-#        matplotlib-cpp/matplotlibcpp.h
-        ${matplotlib_lib}
 #        openGA/src/openga.hpp
         ${openGA_lib}
 #        tool/random_tool.cpp tool/random_tool.h
@@ -194,8 +189,6 @@ set(HEADER_FILES
 #        GALGO-2.0/src/Randomize.hpp
         ${GALGO_include}
 #        tool/random_tool.hpp
-#        matplotlib-cpp/matplotlibcpp.h
-        ${matplotlib_include}
 #        openGA/src/openga.hpp
         ${openGA_include}
 #        tool/random_tool.h
