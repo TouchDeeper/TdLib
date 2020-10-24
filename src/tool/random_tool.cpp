@@ -36,7 +36,7 @@ namespace td{
      * @return a random value sampling from normal distribution
      */
     double NormalSampling(double expected, double sigma) {
-        std::normal_distribution<> norm{expected, sigma};
+        std::normal_distribution<double> norm(expected, sigma);
         std::random_device rd;
         std::default_random_engine rng{rd()};
         return norm(rng);

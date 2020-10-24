@@ -9,7 +9,7 @@ This is a persoal shared library include the commonly used functions in developm
 - PCL1.9
 
 ## Install
-If you don't want to install the realsense module,jut comment the related line in src/CMakelist.txt.
+If you don't want to install the realsense module,just comment the related line in src/CMakelist.txt.
 ```
 cmake .. -DCMAKE_INSTALL_PREFIX:=your_path
 make 
