@@ -2,11 +2,14 @@
 This is a persoal shared library include the commonly used functions in development.
 # Getting Started
 ## Prerequisites
-### realsense
 - librealsense
 - OpenCV
-### PCL
 - PCL1.9
+- glog
+    `sudo apt-get install -y libgoogle-glog-dev`
+- sophus 
+    intstall the version that has `average.hpp`
+
 
 ## Install
 If you don't want to install the realsense module,just comment the related line in src/CMakelist.txt.
