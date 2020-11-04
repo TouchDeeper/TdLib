@@ -22,15 +22,15 @@ include_directories( "/usr/local/include/eigen3" )
 #template sophus
 include_directories(/home/wang/slam/thirdparty/Sophus/install/include)
 #
-## OpenCV
-#find_package(OpenCV REQUIRED)
-#include_directories(${OPENCV_INCLUDE_DIRS})
-#link_directories(${OpenCV_LIBRARY_DIRS})
-#if(OpenCV_FOUND)
-#    MESSAGE(STATUS "OPENCV_INCLUDE_DIRS = " ${OPENCV_INCLUDE_DIRS})
-#    MESSAGE(STATUS "OpenCV_LIBRARY_DIRS = " ${OpenCV_LIBRARY_DIRS})
-#    MESSAGE(STATUS "OpenCV_LIBRARIES = " ${OpenCV_LIBRARIES})
-#endif()
+# OpenCV
+find_package(OpenCV REQUIRED)
+include_directories(${OPENCV_INCLUDE_DIRS})
+link_directories(${OpenCV_LIBRARY_DIRS})
+if(OpenCV_FOUND)
+    MESSAGE(STATUS "OPENCV_INCLUDE_DIRS = " ${OPENCV_INCLUDE_DIRS})
+    MESSAGE(STATUS "OpenCV_LIBRARY_DIRS = " ${OpenCV_LIBRARY_DIRS})
+    MESSAGE(STATUS "OpenCV_LIBRARIES = " ${OpenCV_LIBRARIES})
+endif()
 
 FIND_PACKAGE( OpenMP REQUIRED)
 if(OPENMP_FOUND)
@@ -49,7 +49,7 @@ add_executable(LibTest main.cpp)
 message(STATUS "TdLib_LIBRARIES = " ${TdLib_LIBRARIES})
 target_link_libraries(LibTest ${TdLib_LIBRARIES}
 #        Threads::Threads
-#        ${OpenCV_LIBRARIES}
+        ${OpenCV_LIBRARIES}
 #        ${PCL_LIBRARIES}
         )
 

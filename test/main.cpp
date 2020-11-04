@@ -16,6 +16,7 @@
 #include <eigen3/Eigen/Dense>
 #include <sophus/se3.hpp>
 #include <sophus/so3.hpp>
+#include <TdLibrary/FileOperation/file_manager.hpp>
 
 using namespace std;
 int main() {
@@ -212,6 +213,9 @@ int main() {
 //    Sophus::SE3d SE3_T(R,t);
 //    td::Vec6 se3_T = SE3_T.log();
 //    std::cout<<se3_T <<std::endl;
-
-
+    std::cout<<"focal length: "<<320/tan(1.04666/2);
+    cv::FileStorage fs;
+    td::FileManager::CreateFileCVYaml(fs,"./result.yaml");
+    Eigen::Matrix4f mat = Eigen::Matrix4f::Identity();
+    td::FileManager::Eigen2CVYaml(fs,mat,"matrix");
 }
