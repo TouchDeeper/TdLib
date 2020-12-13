@@ -8,6 +8,8 @@
 #include <vector>
 #include <sophus/se3.hpp>
 #include <sophus/so3.hpp>
+#include <Eigen/Dense>
+
 namespace td{
     //Euler angle is ZYX convention
     /**

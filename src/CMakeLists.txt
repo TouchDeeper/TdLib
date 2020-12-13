@@ -98,7 +98,7 @@ find_package(Boost COMPONENTS system filesystem thread chrono REQUIRED)
 #include_directories(${Sophus_INCLUDE_DIRS})
 
 #template sophus
-include_directories(/home/wang/slam/thirdparty/Sophus/install/include)
+include_directories(/home/td/slam/install/sophus/include)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 set(HEADER_FILES
