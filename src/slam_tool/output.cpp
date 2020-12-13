@@ -2,7 +2,7 @@
 // Created by wang on 20-1-13.
 //
 
-#include "output.h"
+#include "output.hpp"
 namespace td{
     void saveTrajectoryTUM(const std::string &file_name, const VecMat4 &v_Twc)
     {
@@ -23,4 +23,5 @@ namespace td{
         f.close();
         std::cout << "save TUM traj to " << file_name << " done." << std::endl;
     }
+
 }

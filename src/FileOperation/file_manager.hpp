@@ -13,7 +13,18 @@
 namespace td {
 class FileManager{
   public:
-    static bool CreateFile(std::ofstream& ofs, std::string file_path);
+    /**
+     *
+     * @param ofs
+     * @param file_path
+     * @param mode
+        1:ios::app	追加模式。所有写入都追加到文件末尾。
+        2:ios::ate	文件打开后定位到文件末尾。
+        3:ios::out	打开文件用于写入。
+        4:ios::trunc	如果该文件已经存在，其内容将在打开文件之前被截断，即把文件长度设为 0。
+     * @return
+     */
+    static bool CreateFile(std::ofstream& ofs, std::string file_path, int mode);
     static bool CreateFileCVYaml(cv::FileStorage& fs, const std::string& file_path);
 //    template<typename _Tp, int _rows, int _cols, int _options, int _maxRows, int _maxCols>
 //    static bool Eigen2CVYaml(cv::FileStorage& fs, const Eigen::Matrix<_Tp, _rows, _cols, _options, _maxRows, _maxCols>& src, const std::string& node);

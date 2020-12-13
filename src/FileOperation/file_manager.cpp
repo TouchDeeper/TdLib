@@ -9,11 +9,29 @@
 
 
 namespace td {
-bool FileManager::CreateFile(std::ofstream& ofs, std::string file_path) {
+bool FileManager::CreateFile(std::ofstream& ofs, std::string file_path, int mode) {
     ofs.close();
-    boost::filesystem::remove(file_path.c_str());
 
-    ofs.open(file_path.c_str(), std::ios::out);
+//    boost::filesystem::remove(file_path.c_str());
+    switch (mode){
+        case 1:
+            ofs.open(file_path.c_str(), std::ios::app);
+            break;
+        case 2:
+            ofs.open(file_path.c_str(), std::ios::ate);
+            break;
+        case 3:
+            ofs.open(file_path.c_str(), std::ios::out);
+            break;
+        case 4:
+            ofs.open(file_path.c_str(), std::ios::trunc);
+            break;
+        default:
+            std::cout << "mode "<<mode<< " does not exist: "<< std::endl;
+            return false;
+    }
+
+
     if (!ofs) {
         std::cout << "无法生成文件: " << std::endl << file_path << std::endl << std::endl;
         return false;

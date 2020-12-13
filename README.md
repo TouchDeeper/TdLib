@@ -18,6 +18,10 @@ cmake .. -DCMAKE_INSTALL_PREFIX:=your_path
 make 
 make install
 ```
+an example:
+```asm
+cmake .. -DCMAKE_INSTALL_PREFIX:=/home/wang/CLionProjects/TdLibrary/install
+```
 ## Usage
 - test is used to test the TdLib.
 - modify the [`OpenCV_DIR`](https://github.com/TouchDeeper/TdLib/blob/dev/src/CMakeLists.txt#L8) to your path
