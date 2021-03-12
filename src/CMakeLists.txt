@@ -68,7 +68,14 @@ endif()
 include_directories("/usr/local/include/eigen3" )
 
 #PCL
+set(PCL_DIR "/home/td/slam/install/pcl/share/pcl-1.9")
 find_package(PCL 1.8 REQUIRED)
+if(PCL_FOUND)
+    MESSAGE(STATUS "PCL_INCLUDE_DIRS =  ${PCL_INCLUDE_DIRS}")
+    MESSAGE(STATUS "PCL_LIBRARY_DIRS =  ${PCL_LIBRARY_DIRS}")
+    MESSAGE(STATUS "PCL_LIBRARIES =  ${PCL_LIBRARIES}")
+    MESSAGE(STATUS "PCL_VERSION =  ${PCL_VERSION}")
+endif()
 include_directories(${PCL_INCLUDE_DIRS})
 link_directories(${PCL_LIBRARY_DIRS})
 

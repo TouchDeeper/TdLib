@@ -16,7 +16,14 @@ namespace td{
      * @output_param t12
      */
     void IcpTrajectoryAlign(VecVector3d trajectory_1, VecVector3d trajectory_2, Eigen::Matrix3d &R12, Eigen::Vector3d &t12);
-
+    /**
+     * check the log(Tlast_now).norm > th
+     * @param last the last pose
+     * @param now the current pose
+     * @param th the norm threshold
+     * @return log(Tlast_now).norm > th ?
+     */
+    bool moveEnough(Eigen::Matrix4f& last, Eigen::Matrix4f& now, float th );
 }// namespace td
 
 #endif //TDLIB_SLAM_TOOL_H

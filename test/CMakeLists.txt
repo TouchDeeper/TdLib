@@ -6,23 +6,25 @@ find_package(Threads REQUIRED)
 set(CMAKE_CXX_STANDARD 11)
 #add_definitions(-std=c++11)
 #TdLib
-set(TdLib_DIR "/home/wang/CLionProjects/TdLibrary/install/lib/CMake/TdLib/")
+set(TdLib_DIR "/home/td/slam/install/TdLib/lib/CMake/TdLib/")
 find_package(TdLib REQUIRED)
 include_directories(${TdLib_INCLUDE_DIRS})
 MESSAGE(STATUS "TdLib_INCLUDE_DIRS = " ${TdLib_INCLUDE_DIRS})
 
 
 
-# PCL
+#PCL
+set(PCL_DIR "/home/td/slam/install/pcl/share/pcl-1.9")
 find_package(PCL 1.8 REQUIRED)
 include_directories(${PCL_INCLUDE_DIRS})
 link_directories(${PCL_LIBRARY_DIRS})
 # 添加Eigen头文件
 include_directories( "/usr/local/include/eigen3" )
 #template sophus
-include_directories(/home/wang/slam/thirdparty/Sophus/install/include)
+include_directories(/home/td/slam/install/sophus/include)
 #
 # OpenCV
+set(OpenCV_DIR "/usr/local/share/OpenCV")
 find_package(OpenCV REQUIRED)
 include_directories(${OPENCV_INCLUDE_DIRS})
 link_directories(${OpenCV_LIBRARY_DIRS})

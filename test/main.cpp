@@ -213,9 +213,14 @@ int main() {
 //    Sophus::SE3d SE3_T(R,t);
 //    td::Vec6 se3_T = SE3_T.log();
 //    std::cout<<se3_T <<std::endl;
-    std::cout<<"focal length: "<<320/tan(1.04666/2);
-    cv::FileStorage fs;
-    td::FileManager::CreateFileCVYaml(fs,"./result.yaml");
-    Eigen::Matrix4f mat = Eigen::Matrix4f::Identity();
-    td::FileManager::Eigen2CVYaml(fs,mat,"matrix");
+//    std::cout<<"focal length: "<<320/tan(1.04666/2);
+//    cv::FileStorage fs;
+//    td::FileManager::CreateFileCVYaml(fs,"./result.yaml");
+//    Eigen::Matrix4f mat = Eigen::Matrix4f::Identity();
+//    td::FileManager::Eigen2CVYaml(fs,mat,"matrix");
+    Eigen::Quaterniond q(R0);
+    Eigen::Matrix3d m = Eigen::Matrix3d::Identity();
+    Eigen::Vector3d body_euler_cam = {-1.571, 0.000, -1.571};
+    Eigen::Matrix3d body_R_cam = (Eigen::AngleAxisd(body_euler_cam[2],Eigen::Vector3d::UnitZ())*Eigen::AngleAxisd(body_euler_cam[1],Eigen::Vector3d::UnitY())*Eigen::AngleAxisd(body_euler_cam[0],Eigen::Vector3d::UnitX())).matrix();
+    std::cout<<"body_R_cam: \n"<<body_R_cam<<std::endl;
 }

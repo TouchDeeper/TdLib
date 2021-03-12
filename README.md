@@ -12,7 +12,14 @@ This is a persoal shared library include the commonly used functions in developm
 
 
 ## Install
-If you don't want to install the realsense module,just comment the related line in src/CMakelist.txt.
+- If you don't want to install the realsense module,just comment the related line in src/CMakelist.txt.
+- if OpenCV and PCL is not standard installation
+    - modify the `OpenCV_DIR` and `PCL_DIR` to your case
+    - you need to add there lib path to `LD_LIBRARY_PATH`. In my case:
+     
+        `export LD_LIBRARY_PATH=/home/td/slam/install/pcl/lib:$LD_LIBRARY_PATH`.
+         
+         You can add this code to `~/.bashrc` to make it useful to all terminator.
 ```
 cmake .. -DCMAKE_INSTALL_PREFIX:=your_path
 make 
@@ -22,8 +29,8 @@ an example:
 ```asm
 cmake .. -DCMAKE_INSTALL_PREFIX:=/home/wang/CLionProjects/TdLibrary/install
 ```
+
 ## Usage
 - test is used to test the TdLib.
-- modify the [`OpenCV_DIR`](https://github.com/TouchDeeper/TdLib/blob/dev/src/CMakeLists.txt#L8) to your path
 
 

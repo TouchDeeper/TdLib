@@ -1,8 +1,8 @@
-if(NOT EXISTS "/home/wang/CLionProjects/TdLibrary/cmake-build-debug/install_manifest.txt")
-  message(FATAL_ERROR "Cannot find install manifest: /home/wang/CLionProjects/TdLibrary/cmake-build-debug/install_manifest.txt")
-endif(NOT EXISTS "/home/wang/CLionProjects/TdLibrary/cmake-build-debug/install_manifest.txt")
+if(NOT EXISTS "/home/td/slam/ThirdParty/TdLib/cmake-build-debug/install_manifest.txt")
+  message(FATAL_ERROR "Cannot find install manifest: /home/td/slam/ThirdParty/TdLib/cmake-build-debug/install_manifest.txt")
+endif(NOT EXISTS "/home/td/slam/ThirdParty/TdLib/cmake-build-debug/install_manifest.txt")
 
-file(READ "/home/wang/CLionProjects/TdLibrary/cmake-build-debug/install_manifest.txt" files)
+file(READ "/home/td/slam/ThirdParty/TdLib/cmake-build-debug/install_manifest.txt" files)
 string(REGEX REPLACE "\n" ";" files "${files}")
 foreach(file ${files})
   message(STATUS "Uninstalling $ENV{DESTDIR}${file}")

@@ -8,7 +8,7 @@
 #include <vector>
 #include <Eigen/Core>
 #include <sophus/se3.hpp>
-
+#include "../td_eigen/eigen_common_typedef.h"
 namespace td{
     typedef std::vector<Eigen::Vector3d, Eigen::aligned_allocator<Eigen::Vector3d>> VecVector3d;
     typedef std::vector<Sophus::SE3d, Eigen::aligned_allocator<Sophus::SE3d>> VecSopSE3;

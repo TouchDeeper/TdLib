@@ -2,11 +2,13 @@
 // Created by wang on 20-4-27.
 //
 #include <Eigen/Core>
-Eigen::Matrix3d skewSymmetric(const Eigen::Vector3d &q)
+
+// Returns the 3D cross product skew symmetric matrix of a_ given 3D vector
+template<typename T>
+Eigen::Matrix<T, 3, 3> skew(const Eigen::Matrix<T, 3, 1>& vec)
 {
-    Eigen::Matrix3d ans;
-    ans << 0.0, -q(2), q(1),
-            q(2), 0.0, -q(0),
-            -q(1), q(0), 0.0;
-    return ans;
+    return (Eigen::Matrix<T, 3, 3>() << T(0), -vec(2), vec(1),
+            vec(2), T(0), -vec(0),
+            -vec(1), vec(0), T(0)).finished();
 }
+
