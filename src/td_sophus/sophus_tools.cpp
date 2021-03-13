@@ -24,4 +24,5 @@ namespace td{
         so3 = var->log();
         trans /= Rs.size();
     }
+
 }
