@@ -34,6 +34,10 @@ file(GLOB algorithm_data_structure_include algorithm_data_structure/*.h algorith
 file(GLOB eigen_lib td_eigen/*.cpp td_eigen/*.hpp td_eigen/*.h)
 file(GLOB eigen_include td_eigen/*.h td_eigen/*.hpp)
 
+# ceres_lib
+file(GLOB ceres_lib td_ceres/*/*.cpp td_ceres/*/*.hpp td_ceres/*/*.h td_ceres/*.cpp td_ceres/*.h td_ceres/*.hpp  )
+file(GLOB ceres_include td_ceres/*/*.h td_ceres/*/*.hpp td_ceres/*/*.h td_ceres/*/*.hpp)
+
 add_library(TdLib SHARED
         ${thread_safe_lib}
         ${realsense_lib}
@@ -46,6 +50,7 @@ add_library(TdLib SHARED
         ${algorithm_data_structure_lib}
         ${eigen_lib}
         ${sophus_lib}
+        ${ceres_lib}
         )
 #set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
@@ -120,6 +125,7 @@ set(HEADER_FILES
         ${algorithm_data_structure_include}
         ${eigen_include}
         ${sophus_include}
+        ${ceres_include}
         )
 
 target_link_libraries(TdLib PRIVATE
