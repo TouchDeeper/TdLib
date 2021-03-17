@@ -41,7 +41,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <sophus/se3.hpp>
 #include <sophus/sim3.hpp>
-
+#include "assert.h"
 namespace Sophus {
 
 /// @brief Decoupled version of logmap for SE(3)
