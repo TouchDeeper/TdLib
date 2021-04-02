@@ -46,6 +46,12 @@ namespace td{
     * @return 2,1,0 order euler angle
     */
     Eigen::Vector3d RotationToEulerAngle(const Eigen::Matrix3d &rotation);
+    /**
+    * convert rotation to euler angle used in vins
+    * @param rotation
+    * @return ZYX order euler angle
+    */
+    Eigen::Vector3d R2ypr(const Eigen::Matrix3d &R);
 
     template<typename T>
     Eigen::Matrix<T, 3, 3> AngleAxisToRotationMatrix(const Eigen::Matrix<T, 3, 1>& rvec)

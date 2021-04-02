@@ -17,7 +17,7 @@
 #include <sophus/se3.hpp>
 #include <sophus/so3.hpp>
 #include <TdLibrary/FileOperation/file_manager.hpp>
-
+#include <TdLibrary/slam_tool/motion_transformation.hpp>
 using namespace std;
 int main() {
 
@@ -223,4 +223,11 @@ int main() {
     Eigen::Vector3d body_euler_cam = {-1.571, 0.000, -1.571};
     Eigen::Matrix3d body_R_cam = (Eigen::AngleAxisd(body_euler_cam[2],Eigen::Vector3d::UnitZ())*Eigen::AngleAxisd(body_euler_cam[1],Eigen::Vector3d::UnitY())*Eigen::AngleAxisd(body_euler_cam[0],Eigen::Vector3d::UnitX())).matrix();
     std::cout<<"body_R_cam: \n"<<body_R_cam<<std::endl;
+
+    Eigen::Matrix3d body_R_cam0;
+    body_R_cam0 << 0, 0, -1,
+                -1, 0, 0,
+                0, 1, 0;
+    Eigen::Vector3d ypr = td::R2ypr(body_R_cam0);
+    std::cout<<"ypr: "<<ypr.transpose()<<std::endl;
 }

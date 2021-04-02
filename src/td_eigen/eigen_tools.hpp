@@ -57,5 +57,56 @@ namespace td{
             for (int j = 0; j < cols; j++)
                 result(i,j) = buff[ cols*i+j ];
     }
+    template <typename T>
+    static Eigen::Quaternion<T> quaternionAverage(const std::vector<Eigen::Quaternion<T>>& quaternions)
+    {
+        if (quaternions.empty())
+        {
+            std::cerr << "Error trying to calculate the average quaternion of an empty set!\n";
+            return Eigen::Quaternion<T>::Identity();
+        }
+
+        // first build a 4x4 matrix which is the elementwise sum of the product of each quaternion with itself
+        Eigen::Matrix<T, 4, 4> A = Eigen::Matrix<T, 4, 4>::Zero();
+
+        for (int q=0; q<quaternions.size(); ++q){
+            Eigen::Matrix<T, 4, 1> quat_vec = quaternions[q].coeffs();
+            A = A.eval() + quat_vec * quat_vec.transpose();
+        }
+
+
+        // normalise with the number of quaternions
+        A /= quaternions.size();
+
+        // Compute the SVD of this 4x4 matrix
+        Eigen::JacobiSVD<Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic>> svd(A, Eigen::ComputeThinU | Eigen::ComputeThinV);
+
+        Eigen::Matrix<T, Eigen::Dynamic, 1> singularValues = svd.singularValues();
+        Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic> U = svd.matrixU();
+
+        // find the eigen vector corresponding to the largest eigen value
+        int largestEigenValueIndex;
+        float largestEigenValue;
+        bool first = true;
+
+        for (size_t i=0; i<singularValues.rows(); ++i)
+        {
+            if (first)
+            {
+                largestEigenValue = singularValues(i);
+                largestEigenValueIndex = i;
+                first = false;
+            }
+            else if (singularValues(i) > largestEigenValue)
+            {
+                largestEigenValue = singularValues(i);
+                largestEigenValueIndex = i;
+            }
+        }
+
+        Eigen::Quaternion<T> average(U(3, largestEigenValueIndex), U(0, largestEigenValueIndex), U(1, largestEigenValueIndex), U(2, largestEigenValueIndex));
+
+        return average;
+    }
 }
 #endif //TDLIB_EIGEN_TOOLS_HPP
